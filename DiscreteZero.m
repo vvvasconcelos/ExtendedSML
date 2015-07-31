@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 DiscreteZero[vecxy_List]:=
 Module[{vecsi,vecsi2,vvecsi,vecy,transi,x,dx,ToConsider,CloseIndex,dxtemp=0.,xtemp=0.},
   vecy=vecxy[[All,2]];(*list of y values*)
@@ -19,3 +21,30 @@ Module[{vecsi,vecsi2,vvecsi,vecy,transi,x,dx,ToConsider,CloseIndex,dxtemp=0.,xte
 
   Select[Select[Transpose@{x,dx,CloseIndex,ToConsider},#[[-1]]&][[All,1;;-2]],#[[-1]]!=1&&#[[-1]]!=Length[vecy]&]
 ];
+
+
+DiscreteZero2[vecxy_List]:=With[{init=10},
+Module[{x=Table[0.,{i,1,init}],dx=Table[0.,{i,1,init}],CloseIndex=Table[0,{i,1,init}],vsize=init,nzeros=0,dxtemp=0.,xtemp=0.},
+
+
+Do[
+If[vecxy[[i,2]]> 0&&vecxy[[i+1,2]]< 0,
+If[nzeros+1>vsize,
+AppendTo[x,Table[0.,{i,1,init}]];
+AppendTo[dx,Table[0.,{i,1,init}]];
+AppendTo[CloseIndex,Table[0,{i,1,init}]];
+vsize+=init;
+];
+nzeros++;
+
+dx[[nzeros]]=(vecxy[[i+1,2]]-vecxy[[i,2]])/(vecxy[[i+1,1]]-vecxy[[i,1]]);
+x[[nzeros]]=vecxy[[i,1]]-vecxy[[i,2]]dx[[nzeros]];
+CloseIndex[[nzeros]]=If[Abs[xtemp-vecxy[[i,1]]]<Abs[xtemp-vecxy[[i+1,1]]],
+i,i+1
+];
+
+];
+,{i,1,Length[vecxy]-1}];
+
+Transpose@{x[[1;;nzeros]],dx[[1;;nzeros]],CloseIndex[[1;;nzeros]]}
+]];
