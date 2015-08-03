@@ -61,8 +61,6 @@ Transpose@{x[[1;;nzeros]],dx[[1;;nzeros]],CloseIndex[[1;;nzeros]]},
 
 
 TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to that of the second, `2`.";
-
-
 TransitionsPairs[Tp_List,Tm_List]:=If[Length[Tp]==Length[Tm],
 With[{Z=Length[Tp]-1},Module[{zeros=DiscreteZero2[Transpose@{Range[0,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
 If[Length[zeros]>0,
@@ -77,14 +75,14 @@ Flatten[{1.,Table[(Tm[[CoIindex[[i]]]]+Tp[[CoIindex[[i]]]])/(2Z),{i,2,Length[CoI
 },
 SparseArray[Flatten[Table[
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 {{i,i+1}-> Tp[[CoIindex[[i]]]] /Pp,{i+1,i}->Tm[[CoIindex[[i+1]]]]/Pm}
@@ -94,12 +92,12 @@ Pm=1.;Do[Pm=1+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 ,Message[TransitionsPairs::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
 
 
-StatDESML[s_,Z_,T_,par_List]:=
+StatDESML[s_,T_,Z_,par_List]:=
 Module[{CoIp=Table[{{0}},{i,1,Binomial[s,2]}],normp=Table[{{0}},{i,1,Binomial[s,2]}],\[Rho]=Table[{{0}},{i,1,Binomial[s,2]}],CoINorm={{{0,0,0},{0.,0.}}},pair=0,CoIIndex={0},zeros={{0.,0.,0}},CoI={{0}},TMat, vec={0.}},
 
 Do[
 pair++;
-{zeros,\[Rho][[pair]]}=TransitionsPairs[Table[T[s1,s2,i,par],{i,0,Z}],Table[T[s2,s1,i,par],{i,0,Z}]];
+{zeros,\[Rho][[pair]]}=TransitionsPairs[Table[T[s1,s2,i,Z,par],{i,0,Z}],Table[T[s2,s1,i,Z,par],{i,0,Z}]];
 CoIIndex=zeros[[All,1]];
 
 normp[[pair]]=zeros[[All,{3,4}]];
