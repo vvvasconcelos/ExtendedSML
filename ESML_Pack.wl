@@ -6,53 +6,64 @@ BeginPackage["ESMLPack`"];
 StatDESML::usage="StatDESML[s,Z,T,{par1,par2...}] is this and that and gives that and that";
 
 
-
 Begin["Private`"];
 
 
-DiscreteZero[vecXY_List]:=With[{initSize=5},
-Module[{Z=Length[vecXY]-1,xtemp=0.,dxtemp=0.,vsize=initSize,nzeros=0,Output},
+Needs["CCompilerDriver`"]; 
+If[Length[CCompilers[]]==0, $CCompiler={"Name"->"Intel Compiler","Compiler"->CCompilerDriver`IntelCompiler`IntelCompiler,"CompilerInstallation"->"D:\\Program Files (x86)\\Intel\\Composer XE 2015","CompilerName"->Automatic};
+];
+DiscreteZero=Compile[{{vecXY,_Real,2}},
+Module[{
+dx=Internal`Bag[Most[{0.}]],
+x=Internal`Bag[Most[{0.}]],
+index=Internal`Bag[Most[{0}]],
+Z=Length[vecXY]-1,
+xtemp=0.,
+dxtemp=0.,
+thereAreZeros=False
+},
 
-
-Output=Rest[Reap[
 Do[
 If[vecXY[[i,2]]>= 0&&vecXY[[i+1,2]]< 0,
-
 If[vecXY[[i,2]]== 0&&i>1,
-Sow[(vecXY[[i+1,2]]-If[i>1,vecXY[[i-1,2]],vecXY[[i,2]]])/(vecXY[[i+1,1]]-If[i>1,vecXY[[i-1,1]],vecXY[[i,1]]]),dx];
-Sow[vecXY[[i,1]],x]; 
-
-Sow[i,index];
+Internal`StuffBag[dx,(vecXY[[i+1,2]]-If[i>1,vecXY[[i-1,2]],vecXY[[i,2]]])/(vecXY[[i+1,1]]-If[i>1,vecXY[[i-1,1]],vecXY[[i,1]]])];
+Internal`StuffBag[x,vecXY[[i,1]]];
+Internal`StuffBag[index,i];
+If[!thereAreZeros,thereAreZeros=True;];
 ,
 dxtemp=(vecXY[[i+1,2]]-vecXY[[i,2]])/(vecXY[[i+1,1]]-vecXY[[i,1]]);
 xtemp=vecXY[[i,1]]-vecXY[[i,2]]/((vecXY[[i+1,2]]-vecXY[[i,2]])/(vecXY[[i+1,1]]-vecXY[[i,1]])); 
 
 If[Abs[xtemp-vecXY[[i,1]]]<Abs[xtemp-vecXY[[i+1,1]]]&&i>1,
-
-Sow[dxtemp,dx];
-Sow[xtemp,x];
-Sow[i,index];
+Internal`StuffBag[dx,dxtemp];
+Internal`StuffBag[x,xtemp];
+Internal`StuffBag[index,i];
+If[!thereAreZeros,thereAreZeros=True;];
 ,
 If[i>1&&i<Z,
-Sow[dxtemp,dx];
-Sow[xtemp,x];
-Sow[i+1,index];
+Internal`StuffBag[dx,dxtemp];
+Internal`StuffBag[x,xtemp];
+Internal`StuffBag[index,i+1];
+If[!thereAreZeros,thereAreZeros=True;];
 ];
-];];];
+];];
+];
 ,{i,1,Z}];
-]][[1]];
-If[Length@Output>0,
-Transpose[Output],
-{}
+
+
+
+If[thereAreZeros,
+Transpose[{Internal`BagPart[dx,All,List],Internal`BagPart[x,All,List],Internal`BagPart[index,All,List]}],
+{{}}
 ]
 ]
-];
+,CompilationTarget->"C"];
 
 
 TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to that of the second, `2`.";
 TransitionsPairs[Tp_List,Tm_List]:=If[Length[Tp]==Length[Tm],With[{Z=Length[Tp]-1},
 Module[{zeros=DiscreteZero[Transpose@{Range[0,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
-
+(*If[zeros\[Equal]{{}},zeros={};];*)
 If[Length[zeros]>0,
 CoIindex=Flatten@Insert[CoIindex,zeros[[All,-1]],2] ;
 
@@ -66,14 +77,14 @@ Flatten[{1.,Table[(Tm[[CoIindex[[i]]]]+Tp[[CoIindex[[i]]]])/(2Z),{i,2,Length[CoI
 SparseArray[Flatten[Table[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -91,14 +102,14 @@ CoIindex, (* Point index, from 1 to Z+1 *)
 SparseArray[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,2,Z}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -114,14 +125,15 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 
 
 StatDESML[s_,T_,Z_,par_List]:=
+With[{prints=False},
 Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat, vec={0.},speed={0.},temp
 ,innerCoIcount=0,
 CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}]
 },
 
 
-temp=PrintTemporary["Computing CoI and Transitions"];
-Monitor[
+If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
+
 
 {innerCoI,\[Rho]}=Rest[Reap[
 
@@ -148,39 +160,37 @@ innerCoIcount+=Length[zeros]-2;
 ,{s1,1,s-1},{s2,s1+1,s}];
 ]][[1]];
 
-,ProgressIndicator[pairId/Binomial[s,2.]]];
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
 innerCoI=Flatten[innerCoI,1];
 
-temp=PrintTemporary["Flatten do CoI"];
+If[prints,temp=PrintTemporary["Flatten do CoI"];];
 CoI=Flatten[{CoI,innerCoI},1];
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
-temp=PrintTemporary["Construcao da matriz"];
+If[prints,temp=PrintTemporary["Construcao da matriz"];];
 TMat=SparseArray[\[Rho],{1,1}(s+innerCoIcount)];
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
-temp=PrintTemporary["Speed up matrix"];
+If[prints,temp=PrintTemporary["Speed up matrix"]];
 (*Speed up matrix*)
 speed=Total[Transpose@TMat];
 TMat/=Max[speed];
 speed/=Max[speed]; 
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
-temp=PrintTemporary["Diagonal matrix"];
-Monitor[
+If[prints,temp=PrintTemporary["Diagonal matrix"];];
 Do[
 TMat[[i,i]]=1-speed[[i]];
-,{i,1,Length@TMat}];,ProgressIndicator[i/Length@TMat]];
-NotebookDelete[temp];
+,{i,1,Length@TMat}];
+If[prints,NotebookDelete[temp];];
 
-temp=PrintTemporary["Stat Dist"];
+If[prints,temp=PrintTemporary["Stat Dist"];];
 (*vec=NullSpace[Transpose@TMat];*)
 vec=Eigenvectors[Transpose@TMat,1,Method->{"Arnoldi","Shift"->1.00000000001}];
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
-temp=PrintTemporary["Renormalization"];
+If[prints,temp=PrintTemporary["Renormalization"];];
 Which[
 Length[vec]==0,
 Print["Could not compute Stationary Distribution."];
@@ -196,15 +206,16 @@ vec=vec[[1]];
 Do[
 If[CoI[[i,2]]<0,vec[[i]]*=Z Sqrt[2\[Pi] (CoI[[i,3]]/-CoI[[i,2]]) ]];
 ,{i,s+1,Length@vec}];
-NotebookDelete[temp];
+If[prints,NotebookDelete[temp];];
 
-Print["Normalization"];
+
 vec=vec/Total[vec];
 
 ];
 
 
 {CoI[[All,1]],vec}
+]
 ];
 
 
