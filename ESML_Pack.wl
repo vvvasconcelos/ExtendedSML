@@ -9,8 +9,9 @@ StatDESML::usage="StatDESML[s,Z,T,{par1,par2...}] is this and that and gives tha
 Begin["Private`"];
 
 
-Needs["CCompilerDriver`"]; 
-If[Length[CCompilers[]]==0, $CCompiler={"Name"->"Intel Compiler","Compiler"->CCompilerDriver`IntelCompiler`IntelCompiler,"CompilerInstallation"->"D:\\Program Files (x86)\\Intel\\Composer XE 2015","CompilerName"->Automatic};
+Needs["CCompilerDriver`"];
+If[Length[CCompilers[]]==0,
+$CCompiler={"Name"->"Intel Compiler","Compiler"->CCompilerDriver`IntelCompiler`IntelCompiler,"CompilerInstallation"->"D:\\Program Files (x86)\\Intel\\Composer XE 2015","CompilerName"->Automatic};
 ];
 DiscreteZero=Compile[{{vecXY,_Real,2}},
 Module[{
@@ -63,9 +64,9 @@ Transpose[{Internal`BagPart[dx,All,List],Internal`BagPart[x,All,List],Internal`B
 TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to that of the second, `2`.";
 TransitionsPairs[Tp_List,Tm_List]:=If[Length[Tp]==Length[Tm],With[{Z=Length[Tp]-1},
 Module[{zeros=DiscreteZero[Transpose@{Range[0,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
-(*If[zeros\[Equal]{{}},zeros={};];*)
+
 If[Length[zeros]>0,
-CoIindex=Flatten@Insert[CoIindex,zeros[[All,-1]],2] ;
+CoIindex=Flatten@Insert[CoIindex,IntegerPart[zeros[[All,-1]]],2] ;
 
 
 {Transpose@{
@@ -77,14 +78,14 @@ Flatten[{1.,Table[(Tm[[CoIindex[[i]]]]+Tp[[CoIindex[[i]]]])/(2Z),{i,2,Length[CoI
 SparseArray[Flatten[Table[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -102,14 +103,14 @@ CoIindex, (* Point index, from 1 to Z+1 *)
 SparseArray[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,2,Z}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -131,10 +132,9 @@ Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zer
 CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}]
 },
 
-
+(*****************************************************************************)
 If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
-
-
+(*****************************************************************************)
 {innerCoI,\[Rho]}=Rest[Reap[
 
 Do[pairId++;
@@ -161,36 +161,42 @@ innerCoIcount+=Length[zeros]-2;
 ]][[1]];
 
 If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
 
 innerCoI=Flatten[innerCoI,1];
 
 If[prints,temp=PrintTemporary["Flatten do CoI"];];
 CoI=Flatten[{CoI,innerCoI},1];
 If[prints,NotebookDelete[temp];];
-
-If[prints,temp=PrintTemporary["Construcao da matriz"];];
+(*****************************************************************************)
+If[prints,temp=PrintTemporary["Matrix construction"];];
+(*****************************************************************************)
 TMat=SparseArray[\[Rho],{1,1}(s+innerCoIcount)];
-If[prints,NotebookDelete[temp];];
 
-If[prints,temp=PrintTemporary["Speed up matrix"]];
-(*Speed up matrix*)
 speed=Total[Transpose@TMat];
 TMat/=Max[speed];
 speed/=Max[speed]; 
-If[prints,NotebookDelete[temp];];
 
-If[prints,temp=PrintTemporary["Diagonal matrix"];];
+
 Do[
 TMat[[i,i]]=1-speed[[i]];
 ,{i,1,Length@TMat}];
-If[prints,NotebookDelete[temp];];
 
+If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
+
+(*****************************************************************************)
 If[prints,temp=PrintTemporary["Stat Dist"];];
-(*vec=NullSpace[Transpose@TMat];*)
+(*****************************************************************************)
+(*vec=NullSpace[Transpose@TMat];  Cannot use for large matrix due to memory constrains. It is more accurate.*)
 vec=Eigenvectors[Transpose@TMat,1,Method->{"Arnoldi","Shift"->1.00000000001}];
-If[prints,NotebookDelete[temp];];
 
+If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
+
+(*****************************************************************************)
 If[prints,temp=PrintTemporary["Renormalization"];];
+(*****************************************************************************)
 Which[
 Length[vec]==0,
 Print["Could not compute Stationary Distribution."];
@@ -206,12 +212,12 @@ vec=vec[[1]];
 Do[
 If[CoI[[i,2]]<0,vec[[i]]*=Z Sqrt[2\[Pi] (CoI[[i,3]]/-CoI[[i,2]]) ]];
 ,{i,s+1,Length@vec}];
-If[prints,NotebookDelete[temp];];
-
 
 vec=vec/Total[vec];
 
 ];
+
+If[prints,NotebookDelete[temp];];
 
 
 {CoI[[All,1]],vec}
