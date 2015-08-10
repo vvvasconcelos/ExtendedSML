@@ -65,7 +65,7 @@ TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to 
 TransitionsPairs[Tp_List,Tm_List]:=If[Length[Tp]==Length[Tm],With[{Z=Length[Tp]-1},
 Module[{zeros=DiscreteZero[Transpose@{Range[0,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
 
-If[Length[zeros]>0,
+If[zeros!={{}},
 CoIindex=Flatten@Insert[CoIindex,IntegerPart[zeros[[All,-1]]],2] ;
 
 
@@ -78,14 +78,14 @@ Flatten[{1.,Table[(Tm[[CoIindex[[i]]]]+Tp[[CoIindex[[i]]]])/(2Z),{i,2,Length[CoI
 SparseArray[Flatten[Table[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -103,14 +103,14 @@ CoIindex, (* Point index, from 1 to Z+1 *)
 SparseArray[
 
 (*Pp=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([k]\)]\), \(Tp[\([k]\)]\)]\)\);*)
 Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,2,Z}];
 (*Pm=1+\!\(
-\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
-\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
-\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([i]\)] + 1\), \(CoI[\([i + 1]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([i]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([k]\)]\), \(Tm[\([k]\)]\)]\)\)*)
 Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
@@ -125,12 +125,19 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 ,Message[TransitionsPairs::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
 
 
-StatDESML[s_,T_,Z_,par_List]:=
+StatDESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
+StatDESML[s_,T_,Z_,par_List]:=If[ValueQ[T[2,1,0,Z,par]],
 With[{prints=False},
 Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat, vec={0.},speed={0.},temp
 ,innerCoIcount=0,
 CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}]
 },
+
+
+
+
+
+
 
 (*****************************************************************************)
 If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
@@ -221,7 +228,13 @@ If[prints,NotebookDelete[temp];];
 
 
 {CoI[[All,1]],vec}
+
+
 ]
+],
+
+Message[StatDESML::transitiondefinition,T,Z,par];
+{{},{}}
 ];
 
 
