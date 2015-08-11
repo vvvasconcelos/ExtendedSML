@@ -3,7 +3,7 @@
 BeginPackage["ESMLPack`"];
 
 
-StatDESML::usage="StatDESML[s,Z,T,{par1,par2...}] is this and that and gives that and that";
+StatDESML::usage="StatDESML[s,Z,T,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
 
 
 Begin["Private`"];

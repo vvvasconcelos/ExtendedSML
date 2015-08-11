@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    137161,       3066]
-NotebookOptionsPosition[    135264,       3000]
-NotebookOutlinePosition[    135640,       3016]
-CellTagsIndexPosition[    135597,       3013]
+NotebookDataLength[    138210,       3084]
+NotebookOptionsPosition[    136313,       3018]
+NotebookOutlinePosition[    136689,       3034]
+CellTagsIndexPosition[    136646,       3031]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1071,6 +1071,21 @@ La la\
 Cell[BoxData[{
  RowBox[{
   RowBox[{
+   RowBox[{
+    RowBox[{"StatDESML", "::", "usage"}], "=", 
+    "\"\<StatDESML[s,Z,T,{par1,par2...}] represents an estimation of the \
+stationary distribution of a one-step Markov process at the edges of the \
+phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \
+\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \
+\!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+\(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] \
+is the transition probability from configuration \
+(0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \
+\(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\
+\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{"StatDESML", "::", "transitiondefinition"}], "=", 
    "\"\<The function `1` is undefined. Please guarantee that \
 `1`[s1,s2,i,`2`,`3`] has definition.\>\""}], ";"}], "\[IndentingNewLine]", 
@@ -1741,7 +1756,10 @@ errors.\>\"", "]"}], ";", "\[IndentingNewLine]",
    3.6479543410305166`*^9, 3.6479544305227594`*^9}, {3.6479544627170687`*^9, 
    3.6479545302417693`*^9}, {3.64795465837759*^9, 3.6479547785981717`*^9}, {
    3.6479548271052814`*^9, 3.6479548371919603`*^9}, {3.6479552067235756`*^9, 
-   3.647955261680956*^9}}]
+   3.647955261680956*^9}, {3.648302885067238*^9, 3.648302887040307*^9}, {
+   3.64830296422637*^9, 3.6483030068067274`*^9}, {3.648303045519123*^9, 
+   3.648303292500045*^9}, {3.648303514596423*^9, 3.648303642536928*^9}, {
+   3.6483036927062263`*^9, 3.6483037072194834`*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -3041,30 +3059,30 @@ Cell[38910, 877, 8672, 177, 80, "Output"]
 Cell[CellGroupData[{
 Cell[47631, 1060, 165, 2, 47, "Subsection"],
 Cell[47799, 1064, 143, 4, 53, "Text"],
-Cell[47945, 1070, 35229, 673, 2425, "Input"]
+Cell[47945, 1070, 36278, 691, 2540, "Input"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[83223, 1749, 179, 2, 75, "Section"],
-Cell[83405, 1753, 151, 2, 35, "Text"],
-Cell[83559, 1757, 127, 2, 35, "Input"],
-Cell[83689, 1761, 7019, 185, 547, "Input"],
+Cell[84272, 1767, 179, 2, 69, "Section"],
+Cell[84454, 1771, 151, 2, 32, "Text"],
+Cell[84608, 1775, 127, 2, 32, "Input"],
+Cell[84738, 1779, 7019, 185, 498, "Input"],
 Cell[CellGroupData[{
-Cell[90733, 1950, 4697, 94, 234, "Input"],
-Cell[95433, 2046, 441, 10, 25, "Message"],
-Cell[95877, 2058, 518, 10, 26, "Print"],
-Cell[96398, 2070, 446, 10, 30, "Message"],
-Cell[96847, 2082, 464, 10, 30, "Message"],
-Cell[97314, 2094, 550, 11, 25, "Message"],
-Cell[97867, 2107, 9251, 227, 343, "Output"]
+Cell[91782, 1968, 4697, 94, 213, "Input"],
+Cell[96482, 2064, 441, 10, 23, "Message"],
+Cell[96926, 2076, 518, 10, 24, "Print"],
+Cell[97447, 2088, 446, 10, 28, "Message"],
+Cell[97896, 2100, 464, 10, 28, "Message"],
+Cell[98363, 2112, 550, 11, 23, "Message"],
+Cell[98916, 2125, 9251, 227, 279, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[107155, 2339, 6105, 138, 454, "Input"],
-Cell[113263, 2479, 9935, 236, 369, "Output"]
+Cell[108204, 2357, 6105, 138, 499, "Input"],
+Cell[114312, 2497, 9935, 236, 405, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[123235, 2720, 254, 5, 41, "Input"],
-Cell[123492, 2727, 11732, 268, 369, "Output"]
+Cell[124284, 2738, 254, 5, 45, "Input"],
+Cell[124541, 2745, 11732, 268, 405, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
