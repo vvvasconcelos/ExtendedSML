@@ -3,7 +3,7 @@
 BeginPackage["ESMLPack`"];
 
 
-StatDESML::usage="StatDESML[s,Z,T,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
+StatDESML::usage="StatDESML[s,T,Z,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
 
 
 Begin["Private`"];
@@ -63,7 +63,7 @@ Transpose[{Internal`BagPart[dx,All,List],Internal`BagPart[x,All,List],Internal`B
 
 TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to that of the second, `2`.";
 TransitionsPairs[Tp_List,Tm_List]:=If[Length[Tp]==Length[Tm],With[{Z=Length[Tp]-1},
-Module[{zeros=DiscreteZero[Transpose@{Range[0,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
+Module[{zeros=DiscreteZero[Transpose@{Range[0.,Z]/Z,Tp-Tm}], CoIindex={1,Z+1},Pp=1.,Pm=1.},
 
 If[zeros!={{}},
 CoIindex=Flatten@Insert[CoIindex,IntegerPart[zeros[[All,-1]]],2] ;
@@ -125,17 +125,14 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 ,Message[TransitionsPairs::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
 
 
-StatDESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
-StatDESML[s_,T_,Z_,par_List]:=If[ValueQ[T[2,1,0,Z,par]],
+TransitionMatrixESML::usage="StatDESML[s,Z,T,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
+
+TransitionMatrixESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
+TransitionMatrixESML[s_,T_,Z_,par_List]:=If[ValueQ[T[2,1,0,Z,par]],
 With[{prints=False},
-Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat, vec={0.},speed={0.},temp
-,innerCoIcount=0,
-CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}]
+Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat,speed={0.},innerCoIcount=0,
+CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp
 },
-
-
-
-
 
 
 
@@ -185,21 +182,34 @@ TMat/=Max[speed];
 speed/=Max[speed]; 
 
 
-Do[
-TMat[[i,i]]=1-speed[[i]];
+
+If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
+
+
+Do[TMat[[i,i]]=1-speed[[i]];
 ,{i,1,Length@TMat}];
 
-If[prints,NotebookDelete[temp];];
-(*****************************************************************************)
 
-(*****************************************************************************)
-If[prints,temp=PrintTemporary["Stat Dist"];];
-(*****************************************************************************)
-(*vec=NullSpace[Transpose@TMat];  Cannot use for large matrix due to memory constrains. It is more accurate.*)
-vec=Eigenvectors[Transpose@TMat,1,Method->{"Arnoldi","Shift"->1.00000000001}];
+{CoI,TMat}
 
-If[prints,NotebookDelete[temp];];
-(*****************************************************************************)
+
+]
+],
+
+Message[StatDESML::transitiondefinition,T,Z,par];
+{{{}},{{}}}
+];
+
+
+StationaryDistributionESML::usage="StatDESML[s,Z,T,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
+
+StationaryDistributionESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
+StationaryDistributionESML[s_,Z_,CoI_,TMat_,initVec_:Automatic]:=
+With[{prints=False},
+Module[{ vec={0.},speed={0.},temp},
+
+vec=Eigenvectors[Transpose@TMat,1,Method->{"Arnoldi","Shift"->1.00001,"Tolerance"-> 0,"MaxIterations"->10^4,"StartingVector"->initVec}];
 
 (*****************************************************************************)
 If[prints,temp=PrintTemporary["Renormalization"];];
@@ -231,10 +241,6 @@ If[prints,NotebookDelete[temp];];
 
 
 ]
-],
-
-Message[StatDESML::transitiondefinition,T,Z,par];
-{{},{}}
 ];
 
 
