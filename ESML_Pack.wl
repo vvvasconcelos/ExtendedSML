@@ -212,9 +212,13 @@ StationaryDistributionESML::usage="StationaryDistributionESML[s,Z,Configurations
 StationaryDistributionESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
 StationaryDistributionESML[s_,Z_,CoI_,TMat_,initVec_:Automatic]:=
 With[{prints=False},
-Module[{ vec={0.},speed={0.},temp},
+Module[{ vec={0.},speed={0.},\[Sigma]2=0.,temp},
 
+If[Length[TMat]>2,
 vec=Eigenvectors[Transpose@TMat,1,Method->{"Arnoldi","Shift"->1.00001,"Tolerance"-> 0,"MaxIterations"->10^4,"StartingVector"->initVec}];
+,
+vec=Eigenvectors[Transpose@TMat,1];
+];
 
 (*****************************************************************************)
 If[prints,temp=PrintTemporary["Renormalization"];];
@@ -232,7 +236,9 @@ True,
 vec=vec[[1]];
 
 Do[
-If[CoI[[i,2]]<0,vec[[i]]*=Z Sqrt[2\[Pi] (CoI[[i,3]]/-CoI[[i,2]]) ]];
+If[CoI[[i,2]]<0,
+\[Sigma]2=(CoI[[i,3]]//N)/-CoI[[i,2]];
+vec[[i]]*=Z Sqrt[\[Pi] \[Sigma]2/2. ](Erf[(Norm[CoI[[i,1]]]-1.)/(Z Sqrt[2. \[Sigma]2])]+Erf[(Z-Norm[CoI[[i,1]]]-1.)/(Z Sqrt[2. \[Sigma]2])])];
 ,{i,s+1,Length@vec}];
 
 vec=vec/Total[vec];
