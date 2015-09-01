@@ -45,7 +45,7 @@ Cell["Function discription", "Subsection",
 
 Cell["\<\
 This function calculates zeros of a list.....
-La la\
+La la le\
 \>", "Text",
  CellChangeTimes->{{3.6473446110118575`*^9, 3.647344647394018*^9}}],
 
