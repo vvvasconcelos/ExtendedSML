@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    269101,       5904]
-NotebookOptionsPosition[    266965,       5829]
-NotebookOutlinePosition[    267339,       5845]
-CellTagsIndexPosition[    267296,       5842]
+NotebookDataLength[    271271,       5948]
+NotebookOptionsPosition[    269132,       5873]
+NotebookOutlinePosition[    269508,       5889]
+CellTagsIndexPosition[    269465,       5886]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -353,13 +353,14 @@ Cell[BoxData[
    3.6485504194467735`*^9, 3.648551216752736*^9, 3.6485512620788*^9, 
    3.648808196368082*^9, 3.6488091889936466`*^9}]
 }, Open  ]]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["Function discription", "Subsection",
+Cell["TransitionsPairs Function discription", "Subsection",
  CellChangeTimes->{{3.6473446037570405`*^9, 3.6473446084111295`*^9}, {
-  3.6473446401812286`*^9, 3.6473446664576855`*^9}}],
+  3.6473446401812286`*^9, 3.6473446664576855`*^9}, {3.6488183480445123`*^9, 
+  3.648818348544536*^9}}],
 
 Cell["\<\
 This function calculates zeros of a list.....
@@ -903,8 +904,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.235431, 0.32765, 0.833291}, {0.235431, 
@@ -919,8 +921,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -960,8 +963,9 @@ Cell[BoxData[
                   None, Evaluator -> Automatic, Method -> "Preemptive"], 
                  Alignment -> {Center, Center}, ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}]], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
                 GraphicsBox[
                  
                  RasterBox[{{{0.235431, 0.32765, 0.833291}, {0.235431, 
@@ -976,8 +980,9 @@ Cell[BoxData[
                  Directive[
                    GrayLevel[0.5, 0.4]], ImageSize -> 
                  Dynamic[{
-                   Automatic, 3.5 CurrentValue["FontCapHeight"]/
-                    AbsoluteCurrentValue[Magnification]}], 
+                   Automatic, 
+                    3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}], 
                  Method -> {
                   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
                    Automatic, "DefaultPlotStyle" -> Automatic, 
@@ -1054,13 +1059,14 @@ Cell[BoxData[
    3.648551216941861*^9, 3.6485512622639227`*^9, 3.648808196821225*^9, 
    3.648809189149904*^9}]
 }, Open  ]]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
-Cell["Function discription", "Subsection",
+Cell["TransitionMatrixESML Function discription", "Subsection",
  CellChangeTimes->{{3.6473446037570405`*^9, 3.6473446084111295`*^9}, {
-  3.6473446401812286`*^9, 3.6473446664576855`*^9}}],
+  3.6473446401812286`*^9, 3.6473446664576855`*^9}, {3.648818352763485*^9, 
+  3.6488183530134983`*^9}}],
 
 Cell["\<\
 This function calculates zeros of a list.....
@@ -1090,11 +1096,12 @@ CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\
 \(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, \
 respectively, the derivative of the drift (1st Kramers-Moyal term) and the \
 diffusion (2nd Kramers-Moyal term) at the CoI.\\n\[IndentingNewLine]\
-\[IndentingNewLine]TransitionMatrixESML[s,T,Z,{par1,par2...},export] allows \
+\[IndentingNewLine]TransitionMatrixESML[s,T,Z,{par1,par2...}, export] allows \
 to export the transition matrix to a file TransitionMatrix_par1_par2_....mtx \
 and the CoI to a file ConfigurationsOfInterest_par1_par2_....mx that can be \
-imported latter on (the .mx file is not OS or architechture \
-independent).\>\""}], ";"}], "\[IndentingNewLine]", 
+imported latter on (the .mx file is not OS or architechture independent) in \
+the directory provided in export (e.g., export can be NotebookDirectory[]).\>\
+\""}], ";"}], "\[IndentingNewLine]", 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -1103,9 +1110,15 @@ independent).\>\""}], ";"}], "\[IndentingNewLine]",
 `1`[s1,s2,i,`2`,`3`] has definition.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
+   RowBox[{"TransitionMatrixESML", "::", "wrongpath"}], "=", 
+   "\"\<The path `1` is not a valid directory. Please provide a valid \
+directory (e.g., NotebookDirectory[]). Exporting to `2`.\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{"TransitionMatrixESML", "[", 
     RowBox[{"s_", ",", "T_", ",", "Z_", ",", "par_List", ",", " ", 
-     RowBox[{"export_:", "False"}]}], "]"}], ":=", 
+     RowBox[{"exportpath_:", "False"}]}], "]"}], ":=", 
    RowBox[{"If", "[", 
     RowBox[{
      RowBox[{"ValueQ", "[", 
@@ -1196,17 +1209,23 @@ independent).\>\""}], ";"}], "\[IndentingNewLine]",
                     RowBox[{
                     RowBox[{"Table", "[", 
                     RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"i", "\[Equal]", "Z"}], ",", "0.", ",", 
                     RowBox[{"T", "[", 
                     RowBox[{"s2", ",", "s1", ",", 
-                    RowBox[{"Z", "-", "i"}], ",", "Z", ",", "par"}], "]"}], 
-                    ",", 
+                    RowBox[{"Z", "-", "i"}], ",", "Z", ",", "par"}], "]"}]}], 
+                    "]"}], ",", 
                     RowBox[{"{", 
                     RowBox[{"i", ",", "0", ",", "Z"}], "}"}]}], "]"}], ",", 
                     RowBox[{"Table", "[", 
                     RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"i", "\[Equal]", "0"}], ",", "0.", ",", 
                     RowBox[{"T", "[", 
                     RowBox[{"s1", ",", "s2", ",", "i", ",", "Z", ",", "par"}],
-                     "]"}], ",", 
+                     "]"}]}], "]"}], ",", 
                     RowBox[{"{", 
                     RowBox[{"i", ",", "0", ",", "Z"}], "}"}]}], "]"}]}], 
                     "]"}]}], ";", "\[IndentingNewLine]", 
@@ -1432,10 +1451,31 @@ independent).\>\""}], ";"}], "\[IndentingNewLine]",
               RowBox[{"Length", "@", "TMat"}]}], "}"}]}], "]"}], ";", 
           "\[IndentingNewLine]", "\[IndentingNewLine]", 
           RowBox[{"If", "[", 
-           RowBox[{"export", ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"StringQ", "[", "exportpath", "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"Check", " ", "Directory"}], "*)"}], 
+            "\[IndentingNewLine]", 
             RowBox[{
-             RowBox[{"SetDirectory", "[", 
-              RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"DirectoryQ", "[", "exportpath", "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"SetDirectory", "[", "exportpath", "]"}], ";"}], 
+               "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Message", "[", 
+                 RowBox[{
+                  RowBox[{"TransitionMatrixESML", "::", "wrongpath"}], ",", 
+                  "exportpath", ",", 
+                  RowBox[{"NotebookDirectory", "[", "]"}]}], "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"SetDirectory", "[", 
+                 RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]}], 
+              "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"(*", "*)"}], "\[IndentingNewLine]", 
              "\[IndentingNewLine]", 
              RowBox[{"Export", "[", 
               RowBox[{
@@ -1668,14 +1708,18 @@ independent).\>\""}], ";"}], "\[IndentingNewLine]",
    3.6488061889506936`*^9}, {3.648806220374061*^9, 3.6488064742142553`*^9}, {
    3.6488066101738186`*^9, 3.6488066988967733`*^9}, {3.6488067600554013`*^9, 
    3.6488070065046215`*^9}, {3.648808327948769*^9, 3.6488083387617826`*^9}, 
-   3.6488093041646214`*^9}]
+   3.6488093041646214`*^9, {3.648818278994358*^9, 3.648818281135087*^9}, {
+   3.6501145940638776`*^9, 3.650114622812081*^9}, {3.650114697138727*^9, 
+   3.650115036542432*^9}, {3.6501151588181067`*^9, 3.6501151916970673`*^9}, {
+   3.650115555433024*^9, 3.6501156157162905`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Function discription", "Subsection",
+Cell["StationaryDistributionESML Function discription", "Subsection",
  CellChangeTimes->{{3.6473446037570405`*^9, 3.6473446084111295`*^9}, {
-  3.6473446401812286`*^9, 3.6473446664576855`*^9}}],
+  3.6473446401812286`*^9, 3.6473446664576855`*^9}, {3.648818373030072*^9, 
+  3.6488183734050903`*^9}}],
 
 Cell["\<\
 This function calculates zeros of a list.....
@@ -5827,8 +5871,8 @@ ztevFteK9ADRS+xx2sdermuoTAeOfwQsrSnwHwBR2XQ=
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1366, 685},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{1920, 997},
+WindowMargins->{{1358, Automatic}, {Automatic, -8}},
 Magnification:>1.1 Inherited,
 FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
@@ -5845,64 +5889,64 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 342, 6, 218, "Title"],
+Cell[580, 22, 342, 6, 159, "Title"],
 Cell[925, 30, 95, 1, 69, "Section"],
 Cell[CellGroupData[{
 Cell[1045, 35, 124, 2, 53, "Section"],
 Cell[CellGroupData[{
 Cell[1194, 41, 165, 2, 47, "Subsection"],
-Cell[1362, 45, 143, 4, 53, "Text"],
-Cell[1508, 51, 12150, 273, 1243, "Input"],
+Cell[1362, 45, 143, 4, 63, "Text"],
+Cell[1508, 51, 12150, 273, 1721, "Input"],
 Cell[CellGroupData[{
-Cell[13683, 328, 501, 14, 32, "Input"],
-Cell[14187, 344, 433, 9, 33, "Output"]
+Cell[13683, 328, 501, 14, 88, "Input"],
+Cell[14187, 344, 433, 9, 39, "Output"]
 }, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[14669, 359, 165, 2, 47, "Subsection"],
-Cell[14837, 363, 143, 4, 53, "Text"],
-Cell[14983, 369, 23352, 491, 1408, "Input"],
-Cell[CellGroupData[{
-Cell[38360, 864, 667, 13, 32, "Input"],
-Cell[39030, 879, 8702, 175, 80, "Output"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[47781, 1060, 165, 2, 47, "Subsection"],
-Cell[47949, 1064, 143, 4, 53, "Text"],
-Cell[48095, 1070, 32924, 600, 1888, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[81056, 1675, 165, 2, 47, "Subsection"],
-Cell[81224, 1679, 143, 4, 53, "Text"],
-Cell[81370, 1685, 22966, 387, 1271, "Input"],
-Cell[104339, 2074, 68, 1, 32, "Input"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[104456, 2081, 179, 2, 69, "Section"],
-Cell[104638, 2085, 151, 2, 32, "Text"],
-Cell[104792, 2089, 127, 2, 32, "Input"],
-Cell[104922, 2093, 7019, 185, 498, "Input"],
-Cell[CellGroupData[{
-Cell[111966, 2282, 1288, 32, 133, "Input"],
-Cell[113257, 2316, 721, 19, 26, "Print"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[114015, 2340, 96, 1, 32, "Input"],
-Cell[114114, 2343, 107412, 2442, 4830, "Output"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[221563, 4790, 5509, 106, 246, "Input"],
-Cell[227075, 4898, 11049, 255, 279, "Output"]
+Cell[14669, 359, 233, 3, 37, "Subsection"],
+Cell[14905, 364, 143, 4, 63, "Text"],
+Cell[15051, 370, 23352, 491, 2217, "Input"],
+Cell[CellGroupData[{
+Cell[38428, 865, 667, 13, 38, "Input"],
+Cell[39098, 880, 8794, 179, 140, "Output"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[47941, 1065, 237, 3, 37, "Subsection"],
+Cell[48181, 1070, 143, 4, 53, "Text"],
+Cell[48327, 1076, 34781, 637, 2008, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[238161, 5158, 6306, 141, 413, "Input"],
-Cell[244470, 5301, 10142, 239, 279, "Output"]
+Cell[83145, 1718, 243, 3, 47, "Subsection"],
+Cell[83391, 1723, 143, 4, 53, "Text"],
+Cell[83537, 1729, 22966, 387, 1211, "Input"],
+Cell[106506, 2118, 68, 1, 32, "Input"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[254649, 5545, 254, 5, 32, "Input"],
-Cell[254906, 5552, 12019, 272, 312, "Output"]
+Cell[106623, 2125, 179, 2, 69, "Section"],
+Cell[106805, 2129, 151, 2, 32, "Text"],
+Cell[106959, 2133, 127, 2, 32, "Input"],
+Cell[107089, 2137, 7019, 185, 498, "Input"],
+Cell[CellGroupData[{
+Cell[114133, 2326, 1288, 32, 133, "Input"],
+Cell[115424, 2360, 721, 19, 26, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[116182, 2384, 96, 1, 32, "Input"],
+Cell[116281, 2387, 107412, 2442, 6428, "Output"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[223730, 4834, 5509, 106, 246, "Input"],
+Cell[229242, 4942, 11049, 255, 279, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[240328, 5202, 6306, 141, 393, "Input"],
+Cell[246637, 5345, 10142, 239, 279, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[256816, 5589, 254, 5, 32, "Input"],
+Cell[257073, 5596, 12019, 272, 279, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

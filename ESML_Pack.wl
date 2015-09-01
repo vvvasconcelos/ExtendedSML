@@ -3,7 +3,10 @@
 BeginPackage["ESMLPack`"];
 
 
-StatDESML::usage="StatDESML[s,T,Z,{par1,par2...}] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0).";
+TransitionMatrixESML::usage="TransitionMatrixESML[s,T,Z,{par1,par2...}] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (first order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI.\n\[IndentingNewLine]\[IndentingNewLine]TransitionMatrixESML[s,T,Z,{par1,par2...}, export] allows to export the transition matrix to a file TransitionMatrix_par1_par2_....mtx and the CoI to a file ConfigurationsOfInterest_par1_par2_....mx that can be imported latter on (the .mx file is not OS or architechture independent) in the directory provided in export (e.g., export can be NotebookDirectory[]).";
+
+
+StationaryDistributionESML::usage="StationaryDistributionESML[s,Z,ConfigurationsOfInterest,TransitionMatrix] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. ConfigurationsOfInterest contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the Configurations of Interest (CoI), DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must be monomorphic configurations (only one non-zero entrance, equal to Z) and any positive value for DDrift ad diffusion at those is valid. TransitionMatrix is a sparse array with the transition probabilities between the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for details).";
 
 
 Begin["Private`"];
@@ -125,11 +128,9 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 ,Message[TransitionsPairs::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
 
 
-TransitionMatrixESML::usage="TransitionMatrixESML[s,T,Z,{par1,par2...}] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (first order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI.\n\[IndentingNewLine]\[IndentingNewLine]TransitionMatrixESML[s,T,Z,{par1,par2...},export] allows to export the transition matrix to a file TransitionMatrix_par1_par2_....mtx and the CoI to a file ConfigurationsOfInterest_par1_par2_....mx that can be imported latter on (the .mx file is not OS or architechture independent).";
-
-
 TransitionMatrixESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
-TransitionMatrixESML[s_,T_,Z_,par_List, export_:False]:=If[ValueQ[T[2,1,0,Z,par]],
+TransitionMatrixESML::wrongpath="The path `1` is not a valid directory. Please provide a valid directory (e.g., NotebookDirectory[]). Exporting to `2`.";
+TransitionMatrixESML[s_,T_,Z_,par_List, exportpath_:False]:=If[ValueQ[T[2,1,0,Z,par]],
 With[{prints=False},
 Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat,speed={0.},innerCoIcount=0,
 CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp
@@ -144,7 +145,7 @@ If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
 
 Do[pairId++;
 
-{zeros,\[Rho]Temp}=TransitionsPairs[Table[T[s2,s1,Z-i,Z,par],{i,0,Z}],Table[T[s1,s2,i,Z,par],{i,0,Z}]];
+{zeros,\[Rho]Temp}=TransitionsPairs[Table[If[i==Z,0.,T[s2,s1,Z-i,Z,par]],{i,0,Z}],Table[If[i==0,0.,T[s1,s2,i,Z,par]],{i,0,Z}]];
 
 If[Length[zeros]>2,
 Sow[Table[{
@@ -191,8 +192,16 @@ If[prints,NotebookDelete[temp];];
 Do[TMat[[i,i]]=1-speed[[i]];
 ,{i,1,Length@TMat}];
 
-If[export,
+If[StringQ[exportpath],
+(*Check Directory*)
+If[DirectoryQ[exportpath],
+SetDirectory[exportpath];
+,
+Message[TransitionMatrixESML::wrongpath,exportpath,NotebookDirectory[]];
 SetDirectory[NotebookDirectory[]];
+];
+(**)
+
 Export["TransitionMatrix_"<>StringDelete[StringReplace[ToString[par],", "->"_"],{"{","}"}]<>".mtx",TMat];
 Export["ConfigurationsOfInterest_"<>StringDelete[StringReplace[ToString[par],", "->"_"],{"{","}"}]<>".mx",CoI];
 ];
@@ -202,12 +211,10 @@ Export["ConfigurationsOfInterest_"<>StringDelete[StringReplace[ToString[par],", 
 ]
 ],
 
-Message[StatDESML::transitiondefinition,T,Z,par];
+Message[TransitionMatrixESML::transitiondefinition,T,Z,par];
 {{{}},{{}}}
 ];
 
-
-StationaryDistributionESML::usage="StationaryDistributionESML[s,Z,ConfigurationsOfInterest,TransitionMatrix] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. ConfigurationsOfInterest contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the Configurations of Interest (CoI), DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must be monomorphic configurations (only one non-zero entrance, equal to Z) and any positive value for DDrift ad diffusion at those is valid. TransitionMatrix is a sparse array with the transition probabilities between the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for details).";
 
 StationaryDistributionESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
 StationaryDistributionESML[s_,Z_,CoI_,TMat_,initVec_:Automatic]:=
