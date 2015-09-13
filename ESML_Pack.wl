@@ -135,11 +135,11 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 
 TransitionMatrixESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i] has definition.";
 TransitionMatrixESML::wrongpath="The path `1` is not a valid directory. Please provide a valid directory (e.g., NotebookDirectory[]). Exporting to `2`.";
-TransitionMatrixESML[s_,T_,Z_, exportpath_:False]:=
+TransitionMatrixESML[s_,T_,Z_, export_:False]:=
 If[ValueQ[T[2,1,0]],
-With[{prints=True},
+With[{prints=False},
 Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat,speed={0.},innerCoIcount=0,
-CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp
+CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp,exportpath="",exportid=0
 },
 
 
@@ -197,7 +197,7 @@ If[prints,NotebookDelete[temp];];
 
 Do[TMat[[i,i]]=1-speed[[i]];
 ,{i,1,Length@TMat}];
-
+If[Length[export]==0,exportpath=export;,exportpath=export[[1]],exportid=export[[2]];];
 If[StringQ[exportpath],
 (*Check Directory*)
 If[DirectoryQ[exportpath],
@@ -208,8 +208,8 @@ SetDirectory[NotebookDirectory[]];
 ];
 (**)
 
-Export["TransitionMatrix_"<>StringDelete[StringReplace[ToString[par],", "->"_"],{"{","}"}]<>".mtx",TMat];
-Export["ConfigurationsOfInterest_"<>StringDelete[StringReplace[ToString[par],", "->"_"],{"{","}"}]<>".mx",CoI];
+Export["TransitionMatrix_"<>StringDelete[StringReplace[ToString[exportid],", "->"_"],{"{","}"}]<>".mtx",TMat];
+Export["ConfigurationsOfInterest_"<>StringDelete[StringReplace[ToString[exportid],", "->"_"],{"{","}"}]<>".mx",CoI];
 ];
 
 {CoI,TMat}
