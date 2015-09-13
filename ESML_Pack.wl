@@ -1,9 +1,9 @@
 (* ::Package:: *)
 
-BeginPackage["ESMLPack`"];
+BeginPackage["ESML`"];
 
 
-TransitionMatrixESML::usage="TransitionMatrixESML[s,T,Z,{par1,par2...}] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (first order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k,Z,{par1,par2...}] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI.\n\[IndentingNewLine]\[IndentingNewLine]TransitionMatrixESML[s,T,Z,{par1,par2...}, export] allows to export the transition matrix to a file TransitionMatrix_par1_par2_....mtx and the CoI to a file ConfigurationsOfInterest_par1_par2_....mx that can be imported latter on (the .mx file is not OS or architechture independent) in the directory provided in export (e.g., export can be NotebookDirectory[]).";
+TransitionMatrixESML::usage="TransitionMatrixESML[s,T,Z] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (first order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI.\n\[IndentingNewLine]\[IndentingNewLine]TransitionMatrixESML[s,T,Z, export] allows to export the transition matrix to a file TransitionMatrix_par1_par2_....mtx and the CoI to a file ConfigurationsOfInterest_par1_par2_....mx that can be imported latter on (the .mx file is not OS or architechture independent) in the directory provided in export (e.g., export can be NotebookDirectory[]).";
 
 
 StationaryDistributionESML::usage="StationaryDistributionESML[s,Z,ConfigurationsOfInterest,TransitionMatrix] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. ConfigurationsOfInterest contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the Configurations of Interest (CoI), DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must be monomorphic configurations (only one non-zero entrance, equal to Z) and any positive value for DDrift ad diffusion at those is valid. TransitionMatrix is a sparse array with the transition probabilities between the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for details).";
@@ -16,11 +16,13 @@ Needs["CCompilerDriver`"];
 If[Length[CCompilers[]]==0,
 $CCompiler={"Name"->"Intel Compiler","Compiler"->CCompilerDriver`IntelCompiler`IntelCompiler,"CompilerInstallation"->"D:\\Program Files (x86)\\Intel\\Composer XE 2015","CompilerName"->Automatic};
 ];
+
+
 DiscreteZero=Compile[{{vecXY,_Real,2}},
 Module[{
-dx=Internal`Bag[Most[{0.}]],
-x=Internal`Bag[Most[{0.}]],
-index=Internal`Bag[Most[{0}]],
+dx=Internal`Bag[],
+x=Internal`Bag[],
+index=Internal`Bag[],
 Z=Length[vecXY]-1,
 xtemp=0.,
 dxtemp=0.,
@@ -30,27 +32,28 @@ thereAreZeros=False
 Do[
 If[vecXY[[i,2]]>= 0&&vecXY[[i+1,2]]< 0,
 If[vecXY[[i,2]]== 0&&i>1,
-Internal`StuffBag[dx,(vecXY[[i+1,2]]-If[i>1,vecXY[[i-1,2]],vecXY[[i,2]]])/(vecXY[[i+1,1]]-If[i>1,vecXY[[i-1,1]],vecXY[[i,1]]])];
+Internal`StuffBag[dx,(vecXY[[i+1,2]]-vecXY[[i-1,2]])/(vecXY[[i+1,1]]-vecXY[[i-1,1]])];
 Internal`StuffBag[x,vecXY[[i,1]]];
 Internal`StuffBag[index,i];
-If[!thereAreZeros,thereAreZeros=True;];
+If[!thereAreZeros,thereAreZeros=True];
 ,
 dxtemp=(vecXY[[i+1,2]]-vecXY[[i,2]])/(vecXY[[i+1,1]]-vecXY[[i,1]]);
-xtemp=vecXY[[i,1]]-vecXY[[i,2]]/((vecXY[[i+1,2]]-vecXY[[i,2]])/(vecXY[[i+1,1]]-vecXY[[i,1]])); 
+xtemp=vecXY[[i,1]]-vecXY[[i,2]]/dxtemp; 
 
 If[Abs[xtemp-vecXY[[i,1]]]<Abs[xtemp-vecXY[[i+1,1]]]&&i>1,
 Internal`StuffBag[dx,dxtemp];
 Internal`StuffBag[x,xtemp];
-Internal`StuffBag[index,i];
+Internal`StuffBag[index,i+0.];
 If[!thereAreZeros,thereAreZeros=True;];
 ,
-If[i>1&&i<Z,
+If[i<Z,
 Internal`StuffBag[dx,dxtemp];
 Internal`StuffBag[x,xtemp];
-Internal`StuffBag[index,i+1];
+Internal`StuffBag[index,i+1.];
 If[!thereAreZeros,thereAreZeros=True;];
 ];
-];];
+];
+];
 ];
 ,{i,1,Z}];
 
@@ -61,7 +64,9 @@ Transpose[{Internal`BagPart[dx,All,List],Internal`BagPart[x,All,List],Internal`B
 {{}}
 ]
 ]
-,CompilationTarget->"C"];
+,
+{{Internal`BagLength[_],_Integer}},
+CompilationTarget->"C"];
 
 
 TransitionsPairs::difdimensions="The lenght of the first list, `1`, is equal to that of the second, `2`.";
