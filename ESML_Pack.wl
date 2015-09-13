@@ -133,10 +133,11 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 ,Message[TransitionsPairs::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
 
 
-TransitionMatrixESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i,`2`,`3`] has definition.";
+TransitionMatrixESML::transitiondefinition="The function `1` is undefined. Please guarantee that `1`[s1,s2,i] has definition.";
 TransitionMatrixESML::wrongpath="The path `1` is not a valid directory. Please provide a valid directory (e.g., NotebookDirectory[]). Exporting to `2`.";
-TransitionMatrixESML[s_,T_,Z_,par_List, exportpath_:False]:=If[ValueQ[T[2,1,0,Z,par]],
-With[{prints=False},
+TransitionMatrixESML[s_,T_,Z_, exportpath_:False]:=
+If[ValueQ[T[2,1,0]],
+With[{prints=True},
 Module[{CoIFull={{0}},innerCoI={{0.}},\[Rho]Temp={{0}},\[Rho]={{0}},pairId=0,zeros={{0.,0.,0}},TMat,speed={0.},innerCoIcount=0,
 CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp
 },
@@ -150,7 +151,7 @@ If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
 
 Do[pairId++;
 
-{zeros,\[Rho]Temp}=TransitionsPairs[Table[If[i==Z,0.,T[s2,s1,Z-i,Z,par]],{i,0,Z}],Table[If[i==0,0.,T[s1,s2,i,Z,par]],{i,0,Z}]];
+{zeros,\[Rho]Temp}=TransitionsPairs[Table[If[i==Z,0.,T[s2,s1,Z-i]],{i,0,Z}],Table[If[i==0,0.,T[s1,s2,i]],{i,0,Z}]];
 
 If[Length[zeros]>2,
 Sow[Table[{
@@ -216,7 +217,7 @@ Export["ConfigurationsOfInterest_"<>StringDelete[StringReplace[ToString[par],", 
 ]
 ],
 
-Message[TransitionMatrixESML::transitiondefinition,T,Z,par];
+Message[TransitionMatrixESML::transitiondefinition,T];
 {{{}},{{}}}
 ];
 
