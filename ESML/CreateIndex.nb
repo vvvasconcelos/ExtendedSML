@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8375,        234]
-NotebookOptionsPosition[      8045,        218]
-NotebookOutlinePosition[      8401,        234]
-CellTagsIndexPosition[      8358,        231]
+NotebookDataLength[     10015,        268]
+NotebookOptionsPosition[      9543,        248]
+NotebookOutlinePosition[      9889,        263]
+CellTagsIndexPosition[      9846,        260]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,9 +26,6 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"pname", "=", "\"\<ESML\>\""}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"Get", "[", 
-   RowBox[{"pname", "<>", "\"\<`\>\""}], "]"}], ";"}], "\n", 
- RowBox[{
   RowBox[{
    RowBox[{"basepath", "=", 
     RowBox[{
@@ -40,151 +37,182 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"nb", "=", 
    RowBox[{"NotebookOpen", "[", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], "]"}]}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"NotebookSave", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"nb", "=", 
-   RowBox[{"NotebookOpen", "[", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"TaggingRules", "->", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"\"\<ModificationHighlight\>\"", "->", "False"}], ",", 
-       RowBox[{"\"\<Metadata\>\"", "->", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"\"\<context\>\"", "->", 
-           RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", 
-          RowBox[{"\"\<keywords\>\"", "->", 
-           RowBox[{"{", "}"}]}], ",", 
-          RowBox[{"\"\<index\>\"", "->", "True"}], ",", 
-          RowBox[{
-          "\"\<label\>\"", "->", "\"\<OSPackage Package Paclet Symbol\>\""}], 
-          ",", 
-          RowBox[{"\"\<language\>\"", "->", "\"\<en\>\""}], ",", 
-          RowBox[{"\"\<paclet\>\"", "->", "\"\<ESMLPackage Package\>\""}], 
-          ",", 
-          RowBox[{"\"\<status\>\"", "->", "\"\<\>\""}], ",", 
-          RowBox[{"\"\<summary\>\"", "->", 
-           RowBox[{"StationaryDistributionESML", "::", "usage"}]}], ",", 
-          RowBox[{"\"\<synonyms\>\"", "->", 
-           RowBox[{"{", "}"}]}], ",", 
-          RowBox[{
-          "\"\<title\>\"", "->", "\"\<StationaryDistributionESML\>\""}], ",", 
-          
-          RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
-          RowBox[{"\"\<uri\>\"", "->", 
-           RowBox[{
-           "pname", "<>", "\"\</ref/StationaryDistributionESML\>\""}]}]}], 
-         "}"}]}], ",", 
-       RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
-      "}"}]}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"Saveable", "->", "False"}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"StyleDefinitions", "->", 
-     RowBox[{"FrontEnd`FileName", "[", 
-      RowBox[{
-       RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
-      "]"}]}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{
-   RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}], "\n"}], "\n", 
- RowBox[{
-  RowBox[{"snname", ":=", "\"\<TransitionMatrixESML\>\""}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"nb", "=", 
-   RowBox[{"NotebookOpen", "[", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], "]"}]}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"NotebookSave", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"nb", "=", 
-   RowBox[{"NotebookOpen", "[", 
-    RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"TaggingRules", "->", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"\"\<ModificationHighlight\>\"", "->", "False"}], ",", 
-       RowBox[{"\"\<Metadata\>\"", "->", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"\"\<context\>\"", "->", 
-           RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", 
-          RowBox[{"\"\<keywords\>\"", "->", 
-           RowBox[{"{", "}"}]}], ",", 
-          RowBox[{"\"\<index\>\"", "->", "True"}], ",", 
-          RowBox[{
-          "\"\<label\>\"", "->", "\"\<OSPackage Package Paclet Symbol\>\""}], 
-          ",", 
-          RowBox[{"\"\<language\>\"", "->", "\"\<en\>\""}], ",", 
-          RowBox[{"\"\<paclet\>\"", "->", "\"\<ESMLPackage Package\>\""}], 
-          ",", 
-          RowBox[{"\"\<status\>\"", "->", "\"\<\>\""}], ",", 
-          RowBox[{"\"\<summary\>\"", "->", 
-           RowBox[{"TransitionMatrixESML", "::", "usage"}]}], ",", 
-          RowBox[{"\"\<synonyms\>\"", "->", 
-           RowBox[{"{", "}"}]}], ",", 
-          RowBox[{"\"\<title\>\"", "->", "\"\<TransitionMatrixESML\>\""}], 
-          ",", 
-          RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
-          RowBox[{"\"\<uri\>\"", "->", 
-           RowBox[{"pname", "<>", "\"\</ref/TransitionMatrixESML\>\""}]}]}], 
-         "}"}]}], ",", 
-       RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
-      "}"}]}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"Saveable", "->", "False"}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"SetOptions", "[", 
-   RowBox[{"nb", ",", 
-    RowBox[{"StyleDefinitions", "->", 
-     RowBox[{"FrontEnd`FileName", "[", 
-      RowBox[{
-       RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
-      "]"}]}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{
-   RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}], "\n", 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"indir", "=", 
-   RowBox[{
-   "$UserBaseDirectory", "<>", "\"\</Applications/\>\"", "<>", "pname", "<>", 
-    "\"\</Documentation/English/Index\>\""}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"If", "[", 
-   RowBox[{
     RowBox[{
-     RowBox[{"FileNames", "[", "indir", "]"}], "!=", 
-     RowBox[{"{", "}"}]}], ",", 
-    RowBox[{"DeleteDirectory", "[", 
-     RowBox[{"indir", ",", 
-      RowBox[{"DeleteContents", "->", "True"}]}], "]"}]}], "]"}], 
-  ";"}]}], "Input",
+     RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], ",", 
+     RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6514170347447157`*^9, 3.6514170353050857`*^9}, {
+  3.6514171743753233`*^9, 3.651417177823611*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookSave", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nb", "=", 
+     RowBox[{"NotebookOpen", "[", 
+      RowBox[{
+       RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}], ",", 
+       RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"TaggingRules", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<ModificationHighlight\>\"", "->", "False"}], ",", 
+         RowBox[{"\"\<Metadata\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<context\>\"", "->", 
+             RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", 
+            RowBox[{"\"\<keywords\>\"", "->", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"\"\<index\>\"", "->", "True"}], ",", 
+            RowBox[{
+            "\"\<label\>\"", "->", 
+             "\"\<OSPackage Package Paclet Symbol\>\""}], ",", 
+            RowBox[{"\"\<language\>\"", "->", "\"\<en\>\""}], ",", 
+            RowBox[{"\"\<paclet\>\"", "->", "\"\<ESMLPackage Package\>\""}], 
+            ",", 
+            RowBox[{"\"\<status\>\"", "->", "\"\<\>\""}], ",", 
+            RowBox[{"\"\<summary\>\"", "->", 
+             RowBox[{"StationaryDistributionESML", "::", "usage"}]}], ",", 
+            RowBox[{"\"\<synonyms\>\"", "->", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{
+            "\"\<title\>\"", "->", "\"\<StationaryDistributionESML\>\""}], 
+            ",", 
+            RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
+            RowBox[{"\"\<uri\>\"", "->", 
+             RowBox[{
+             "pname", "<>", "\"\</ref/StationaryDistributionESML\>\""}]}]}], 
+           "}"}]}], ",", 
+         RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
+        "}"}]}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"Saveable", "->", "False"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"StyleDefinitions", "->", 
+       RowBox[{"FrontEnd`FileName", "[", 
+        RowBox[{
+         RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}],
+         "]"}]}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}], "\n"}]}]], "Input",
+ CellChangeTimes->{{3.6514170219162045`*^9, 3.651417026730399*^9}, 
+   3.651417198400258*^9, {3.651417235015543*^9, 3.6514172615591483`*^9}, 
+   3.6514172953985915`*^9}],
+
+Cell[BoxData["Notebook"], "Output",
+ CellChangeTimes->{3.6514170087084455`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"snname", ":=", "\"\<TransitionMatrixESML\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nb", "=", 
+     RowBox[{"NotebookOpen", "[", 
+      RowBox[{
+       RowBox[{"basepath", "<>", "snname", "<>", "\"\<_E.nb\>\""}], ",", 
+       RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"nb", "=", 
+     RowBox[{"NotebookOpen", "[", 
+      RowBox[{
+       RowBox[{"basepath", "<>", "snname", "<>", "\"\<.nb\>\""}], ",", 
+       RowBox[{"Visible", "\[Rule]", "False"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"TaggingRules", "->", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<ModificationHighlight\>\"", "->", "False"}], ",", 
+         RowBox[{"\"\<Metadata\>\"", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<context\>\"", "->", 
+             RowBox[{"pname", "<>", "\"\<`\>\""}]}], ",", 
+            RowBox[{"\"\<keywords\>\"", "->", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"\"\<index\>\"", "->", "True"}], ",", 
+            RowBox[{
+            "\"\<label\>\"", "->", 
+             "\"\<OSPackage Package Paclet Symbol\>\""}], ",", 
+            RowBox[{"\"\<language\>\"", "->", "\"\<en\>\""}], ",", 
+            RowBox[{"\"\<paclet\>\"", "->", "\"\<ESMLPackage Package\>\""}], 
+            ",", 
+            RowBox[{"\"\<status\>\"", "->", "\"\<\>\""}], ",", 
+            RowBox[{"\"\<summary\>\"", "->", 
+             RowBox[{"TransitionMatrixESML", "::", "usage"}]}], ",", 
+            RowBox[{"\"\<synonyms\>\"", "->", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"\"\<title\>\"", "->", "\"\<TransitionMatrixESML\>\""}], 
+            ",", 
+            RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
+            RowBox[{"\"\<uri\>\"", "->", 
+             RowBox[{"pname", "<>", "\"\</ref/TransitionMatrixESML\>\""}]}]}],
+            "}"}]}], ",", 
+         RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
+        "}"}]}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"Saveable", "->", "False"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"nb", ",", 
+      RowBox[{"StyleDefinitions", "->", 
+       RowBox[{"FrontEnd`FileName", "[", 
+        RowBox[{
+         RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}],
+         "]"}]}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"NotebookSave", "[", "nb", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"indir", "=", 
+     RowBox[{
+     "$UserBaseDirectory", "<>", "\"\</Applications/\>\"", "<>", "pname", 
+      "<>", "\"\</Documentation/English/Index\>\""}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"FileNames", "[", "indir", "]"}], "!=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"DeleteDirectory", "[", 
+       RowBox[{"indir", ",", 
+        RowBox[{"DeleteContents", "->", "True"}]}], "]"}]}], "]"}], 
+    ";"}]}]}]], "Input",
  CellChangeTimes->{{3.651411986318206*^9, 3.651412001856677*^9}, {
    3.651412072456655*^9, 3.6514120946977787`*^9}, {3.651412303259206*^9, 
    3.651412310916646*^9}, {3.651412550956252*^9, 3.651412555367628*^9}, {
@@ -192,7 +220,9 @@ Cell[BoxData[{
    3.651413065464596*^9, 3.651413068351812*^9}, {3.65141322402641*^9, 
    3.651413224323468*^9}, {3.651413301927001*^9, 3.6514133072282457`*^9}, {
    3.651413849842353*^9, 3.651413874938242*^9}, 3.6514140108322687`*^9, {
-   3.6514140673133698`*^9, 3.65141407072902*^9}}],
+   3.6514140673133698`*^9, 3.65141407072902*^9}, {3.651416835109053*^9, 
+   3.6514168356043816`*^9}, {3.651416942395463*^9, 3.651416944715001*^9}, 
+   3.651417001258503*^9, {3.6514172683986845`*^9, 3.6514173025263195`*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -216,10 +246,9 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.6514121082455807`*^9, 3.6514121392687073`*^9}}]
 },
-WindowSize->{1168, 1035},
-WindowMargins->{{202, Automatic}, {Automatic, 0}},
-FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
-2015)",
+WindowSize->{1168, 709},
+WindowMargins->{{-1735, Automatic}, {202, Automatic}},
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -233,9 +262,14 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 130, 2, 28, "Input"],
-Cell[691, 24, 6586, 170, 624, "Input"],
-Cell[7280, 196, 761, 20, 97, "Input"]
+Cell[558, 20, 130, 2, 31, "Input"],
+Cell[691, 24, 758, 19, 132, "Input"],
+Cell[CellGroupData[{
+Cell[1474, 47, 2917, 71, 332, "Input"],
+Cell[4394, 120, 79, 1, 31, "Output"]
+}, Open  ]],
+Cell[4488, 124, 4287, 100, 412, "Input"],
+Cell[8778, 226, 761, 20, 112, "Input"]
 }
 ]
 *)

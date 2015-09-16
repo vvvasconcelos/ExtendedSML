@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     13458,        389]
-NotebookOptionsPosition[     10014,        300]
-NotebookOutlinePosition[     12156,        348]
-CellTagsIndexPosition[     12071,        343]
+NotebookDataLength[     12475,        376]
+NotebookOptionsPosition[      9975,        300]
+NotebookOutlinePosition[     11173,        335]
+CellTagsIndexPosition[     11088,        330]
 WindowTitle->StationaryDistributionESML - ESML`ESMLPackage`
 WindowFrame->Normal*)
 
@@ -96,17 +96,17 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]StationaryDistributionESML[s,Z,ConfigurationsOfInterest,\
 TransitionMatrix] represents an estimation of the stationary distribution of \
 a one-step Markov process at the edges of the phase space. \
-ConfigurationsOfInterest contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} \
-where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \
-\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the \
-Configurations of Interest (CoI), DDrift_i and diffusion_i are, respectively, \
-the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
-Kramers-Moyal term) at the CoI. The first s elements must be monomorphic \
-configurations (only one non-zero entrance, equal to Z) and any positive \
-value for DDrift ad diffusion at those is valid. TransitionMatrix is a sparse \
-array with the transition probabilities between the CoI in the long run. Both \
-ConfigurationsOfInterest and TransitionMatrix can be obtained from \
-TransitionMatrixESML (see ?TransitionMatrixESML for details)."
+ConfigurationsOfInterest contains a list {{CoI_ 1,DDrift_ 1,diffusion_ 1}, \
+...,} where CoI_i is an array {Subscript[i, 1],...,Subscript[i, s]} with the \
+position of the Configurations of Interest (CoI), DDrift_i and diffusion_i \
+are, respectively, the derivative of the drift (1st Kramers-Moyal term) and \
+the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must \
+be monomorphic configurations (only one non-zero entrance, equal to Z) and \
+any positive value for DDrift ad diffusion at those is valid. \
+TransitionMatrix is a sparse array with the transition probabilities between \
+the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix \
+can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for \
+details)."
     }]]}
   }]], "Usage"],
 
@@ -133,7 +133,7 @@ Cell[TextData[Cell[BoxData[
 
 Cell["Note about the function goes here.", "Notes"],
 
-Cell["Another rrrrNote about the function goes here.", "Notes"]
+Cell["Another Note about the function goes here.", "Notes"]
 }, Open  ]]
 }, Open  ]],
 
@@ -298,9 +298,9 @@ Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
 
 Cell[" ", "FooterCell"]
 },
-Saveable->True,
-WindowSize->{1114, 930},
-WindowMargins->{{346, Automatic}, {Automatic, 33}},
+Saveable->False,
+WindowSize->{1904, 997},
+WindowMargins->{{Automatic, 1374}, {30, Automatic}},
 WindowTitle->"StationaryDistributionESML - ESML`ESMLPackage`",
 DockedCells->None,
 TaggingRules->{
@@ -309,26 +309,13 @@ TaggingRules->{
    "context" -> "ESML`", "keywords" -> {}, "index" -> True, "label" -> 
     "OSPackage Package Paclet Symbol", "language" -> "en", "paclet" -> 
     "ESMLPackage Package", "status" -> "", "summary" -> 
-    "StationaryDistributionESML[s,Z,ConfigurationsOfInterest,TransitionMatrix]\
- represents an estimation of the stationary distribution of a one-step Markov \
-process at the edges of the phase space. ConfigurationsOfInterest contains a \
-list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
-{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
-with the position of the Configurations of Interest (CoI), DDrift_i and \
-diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal \
-term) and the diffusion (2nd Kramers-Moyal term) at the CoI. The first s \
-elements must be monomorphic configurations (only one non-zero entrance, \
-equal to Z) and any positive value for DDrift ad diffusion at those is valid. \
-TransitionMatrix is a sparse array with the transition probabilities between \
-the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix \
-can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for \
-details).", "synonyms" -> {}, "title" -> "StationaryDistributionESML", "type" -> 
+    MessageName[$CellContext`StationaryDistributionESML, "usage"], 
+    "synonyms" -> {}, "title" -> "StationaryDistributionESML", "type" -> 
     "Symbol", "uri" -> "ESML/ref/StationaryDistributionESML"}, 
   "SearchTextTranslated" -> ""},
-FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
-2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
-  CharacterEncoding -> "UTF-8"]
+  CharacterEncoding -> "WindowsANSI"]
 ]
 (* End of Notebook Content *)
 
@@ -336,61 +323,61 @@ StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb",
 (*CellTagsOutline
 CellTagsIndex->{
  "PrimaryExamplesSection"->{
-  Cell[5362, 141, 516, 13, 29, "PrimaryExamplesSection",
+  Cell[5323, 141, 516, 13, 30, "PrimaryExamplesSection",
    CellTags->"PrimaryExamplesSection"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"PrimaryExamplesSection", 11950, 337}
+ {"PrimaryExamplesSection", 10967, 324}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[618, 21, 2501, 60, 51, "AnchorBarGrid"],
+Cell[618, 21, 2501, 60, 48, "AnchorBarGrid"],
 Cell[3122, 83, 48, 0, 43, "ObjectName"],
 Cell[CellGroupData[{
-Cell[3195, 87, 1338, 23, 164, "Usage"],
+Cell[3195, 87, 1303, 23, 109, "Usage"],
 Cell[CellGroupData[{
-Cell[4558, 114, 635, 17, 41, "NotesSection",
+Cell[4523, 114, 635, 17, 42, "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
-Cell[5196, 133, 51, 0, 32, "Notes"],
-Cell[5250, 135, 63, 0, 32, "Notes"]
+Cell[5161, 133, 51, 0, 30, "Notes"],
+Cell[5215, 135, 59, 0, 30, "Notes"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5362, 141, 516, 13, 29, "PrimaryExamplesSection",
+Cell[5323, 141, 516, 13, 30, "PrimaryExamplesSection",
  CellTags->"PrimaryExamplesSection"],
 Cell[CellGroupData[{
-Cell[5903, 158, 221, 5, 24, "ExampleSection"],
-Cell[6127, 165, 78, 0, 35, "ExampleText"]
+Cell[5864, 158, 221, 5, 25, "ExampleSection"],
+Cell[6088, 165, 78, 0, 33, "ExampleText"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6242, 170, 257, 7, 26, "ExampleSection"],
-Cell[6502, 179, 78, 0, 35, "ExampleText"]
+Cell[6203, 170, 257, 7, 25, "ExampleSection"],
+Cell[6463, 179, 78, 0, 33, "ExampleText"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6629, 185, 471, 12, 29, "SeeAlsoSection"],
-Cell[7103, 199, 484, 17, 59, "SeeAlso"]
+Cell[6590, 185, 471, 12, 30, "SeeAlsoSection"],
+Cell[7064, 199, 484, 17, 56, "SeeAlso"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7624, 221, 474, 12, 29, "TutorialsSection"],
-Cell[8101, 235, 125, 2, 20, "Tutorials"],
-Cell[8229, 239, 125, 2, 20, "Tutorials"]
+Cell[7585, 221, 474, 12, 30, "TutorialsSection"],
+Cell[8062, 235, 125, 2, 18, "Tutorials"],
+Cell[8190, 239, 125, 2, 18, "Tutorials"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8391, 246, 475, 12, 29, "MoreAboutSection"],
-Cell[8869, 260, 119, 2, 20, "MoreAbout"],
-Cell[8991, 264, 119, 2, 20, "MoreAbout"]
+Cell[8352, 246, 475, 12, 30, "MoreAboutSection"],
+Cell[8830, 260, 119, 2, 18, "MoreAbout"],
+Cell[8952, 264, 119, 2, 18, "MoreAbout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9147, 271, 481, 12, 29, "RelatedLinksSection"],
-Cell[9631, 285, 129, 3, 20, "RelatedLinks"],
-Cell[9763, 290, 129, 3, 20, "RelatedLinks"]
+Cell[9108, 271, 481, 12, 30, "RelatedLinksSection"],
+Cell[9592, 285, 129, 3, 18, "RelatedLinks"],
+Cell[9724, 290, 129, 3, 18, "RelatedLinks"]
 }, Open  ]],
-Cell[9907, 296, 77, 0, 45, "History"],
-Cell[9987, 298, 23, 0, 24, "FooterCell"]
+Cell[9868, 296, 77, 0, 43, "History"],
+Cell[9948, 298, 23, 0, 25, "FooterCell"]
 }
 ]
 *)

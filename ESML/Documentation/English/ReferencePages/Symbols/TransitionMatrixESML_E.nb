@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     13875,        397]
+NotebookDataLength[     12637,        378]
 NotebookOptionsPosition[     10164,        303]
-NotebookOutlinePosition[     12571,        356]
-CellTagsIndexPosition[     12486,        351]
+NotebookOutlinePosition[     11333,        337]
+CellTagsIndexPosition[     11248,        332]
 WindowTitle->TransitionMatrixESML - ESML`ESMLPackage`
 WindowFrame->Normal*)
 
@@ -301,7 +301,7 @@ Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
 
 Cell[" ", "FooterCell"]
 },
-Saveable->True,
+Saveable->False,
 WindowSize->{808, 911},
 WindowMargins->{{556, Automatic}, {Automatic, 60}},
 WindowTitle->"TransitionMatrixESML - ESML`ESMLPackage`",
@@ -312,31 +312,12 @@ TaggingRules->{
    "context" -> "ESML`", "keywords" -> {}, "index" -> True, "label" -> 
     "OSPackage Package Paclet Symbol", "language" -> "en", "paclet" -> 
     "ESMLPackage Package", "status" -> "", "summary" -> 
-    "TransitionMatrixESML[s,T,Z] represents the transition matrix between a \
-set of Configurations of Interest (CoI) in the long run of a one-step Markov \
-process at the edges of the phase space (first order approximation) as well \
-as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \
-\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \
-\!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
-\(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
-probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
-\(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
-\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
-\(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
-TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
-a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
-{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
-with the position of the CoI, DDrift_i and diffusion_i are, respectively, the \
-derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
-Kramers-Moyal term) at the CoI.\n", "synonyms" -> {}, "title" -> 
-    "TransitionMatrixESML", "type" -> "Symbol", "uri" -> 
-    "/Users/fpedro/Library/Mathematica/Applications/ESML/Documentation/\
-English/ReferencePages/Symbols//ref/TransitionMatrixESML"}, 
-  "SearchTextTranslated" -> ""},
-FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
-2015)",
+    MessageName[$CellContext`TransitionMatrixESML, "usage"], "synonyms" -> {},
+     "title" -> "TransitionMatrixESML", "type" -> "Symbol", "uri" -> 
+    "ESML/ref/TransitionMatrixESML"}, "SearchTextTranslated" -> ""},
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
-  CharacterEncoding -> "UTF-8"]
+  CharacterEncoding -> "WindowsANSI"]
 ]
 (* End of Notebook Content *)
 
@@ -350,7 +331,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"PrimaryExamplesSection", 12365, 345}
+ {"PrimaryExamplesSection", 11127, 326}
  }
 *)
 (*NotebookFileOutline
