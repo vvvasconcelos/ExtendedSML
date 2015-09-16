@@ -1,0 +1,406 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13875,        397]
+NotebookOptionsPosition[     10164,        303]
+NotebookOutlinePosition[     12571,        356]
+CellTagsIndexPosition[     12486,        351]
+WindowTitle->TransitionMatrixESML - ESML`ESMLPackage`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["ESML`ESMLPACKAGE` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "ESML", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "ESML", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "ESML", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "ESML", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "ESML", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "ESML", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Go to ESML/ref/TransitionMatrixESML URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell["TransitionMatrixESML", "ObjectName"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["TransitionMatrixESML",
+        BaseStyle->"Link",
+        ButtonData->"paclet:ESML/ref/TransitionMatrixESML"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]TransitionMatrixESML[s,T,Z] represents the transition \
+matrix between a set of Configurations of Interest (CoI) in the long run of a \
+one-step Markov process at the edges of the phase space (first order \
+approximation) as well as the set itself. The process is \
+i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) \
+such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+\(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
+probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
+\(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
+\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
+\(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
+TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
+a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
+{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
+with the position of the CoI, DDrift_i and diffusion_i are, respectively, the \
+derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
+Kramers-Moyal term) at the CoI.\n"
+    }]]}
+  }]], "Usage"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell["Note about the function goes here.", "Notes"],
+
+Cell["Another Note about the function goes here.", "Notes"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(#)", "ExampleCount"]
+}], "ExampleSection", "ExampleSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell["Use the ExampleText style to write cells like this one.", "ExampleText"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[TextData[{
+   "Scope",
+   "  ",
+   Cell["(#)", "ExampleCount"]
+  }], "ExampleSection"],
+  $Line = 0; Null]], "ExampleSection", "ExampleSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell["Use the ExampleText style to write cells like this one.", "ExampleText"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["SymbolOne",
+    BaseStyle->"Link",
+    ButtonData->"paclet:ESML/ref/SymbolOne"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["SymbolTwo",
+    BaseStyle->"Link",
+    ButtonData->"paclet:ESML/ref/SymbolTwo"],
+   FontFamily->"Verdana"]], "InlineFormula"]
+}], "SeeAlso"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "TutorialsSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell[TextData[ButtonBox["Tutorial Title 1",
+ BaseStyle->"Link",
+ ButtonData->"paclet:ESML/tutorial/tutorial1"]], "Tutorials"],
+
+Cell[TextData[ButtonBox["Tutorial Title 2",
+ BaseStyle->"Link",
+ ButtonData->"paclet:ESML/tutorial/tutorial2"]], "Tutorials"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell[TextData[ButtonBox["Title of Guide 1",
+ BaseStyle->"Link",
+ ButtonData->"paclet:ESML/guide/Guide1"]], "MoreAbout"],
+
+Cell[TextData[ButtonBox["Title of Guide 2",
+ BaseStyle->"Link",
+ ButtonData->"paclet:ESML/guide/Guide2"]], "MoreAbout"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED LINKS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedLinksSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell[TextData[ButtonBox["Link Title 1",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["URL.goes.here"], None}]], "RelatedLinks"],
+
+Cell[TextData[ButtonBox["Link Title 2",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["URL.goes.here"], None}]], "RelatedLinks"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->True,
+WindowSize->{808, 911},
+WindowMargins->{{556, Automatic}, {Automatic, 60}},
+WindowTitle->"TransitionMatrixESML - ESML`ESMLPackage`",
+DockedCells->None,
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "ESML`", "keywords" -> {}, "index" -> True, "label" -> 
+    "OSPackage Package Paclet Symbol", "language" -> "en", "paclet" -> 
+    "ESMLPackage Package", "status" -> "", "summary" -> 
+    "TransitionMatrixESML[s,T,Z] represents the transition matrix between a \
+set of Configurations of Interest (CoI) in the long run of a one-step Markov \
+process at the edges of the phase space (first order approximation) as well \
+as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \
+\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \
+\!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+\(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
+probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
+\(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
+\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
+\(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
+TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
+a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
+{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
+with the position of the CoI, DDrift_i and diffusion_i are, respectively, the \
+derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
+Kramers-Moyal term) at the CoI.\n", "synonyms" -> {}, "title" -> 
+    "TransitionMatrixESML", "type" -> "Symbol", "uri" -> 
+    "/Users/fpedro/Library/Mathematica/Applications/ESML/Documentation/\
+English/ReferencePages/Symbols//ref/TransitionMatrixESML"}, 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
+2015)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[5512, 144, 516, 13, 29, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 12365, 345}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[612, 21, 2495, 60, 51, "AnchorBarGrid"],
+Cell[3110, 83, 42, 0, 43, "ObjectName"],
+Cell[CellGroupData[{
+Cell[3177, 87, 1510, 26, 238, "Usage"],
+Cell[CellGroupData[{
+Cell[4712, 117, 635, 17, 41, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+Cell[5350, 136, 51, 0, 32, "Notes"],
+Cell[5404, 138, 59, 0, 32, "Notes"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5512, 144, 516, 13, 29, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection"],
+Cell[CellGroupData[{
+Cell[6053, 161, 221, 5, 24, "ExampleSection"],
+Cell[6277, 168, 78, 0, 35, "ExampleText"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6392, 173, 257, 7, 26, "ExampleSection"],
+Cell[6652, 182, 78, 0, 35, "ExampleText"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6779, 188, 471, 12, 29, "SeeAlsoSection"],
+Cell[7253, 202, 484, 17, 59, "SeeAlso"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7774, 224, 474, 12, 29, "TutorialsSection"],
+Cell[8251, 238, 125, 2, 20, "Tutorials"],
+Cell[8379, 242, 125, 2, 20, "Tutorials"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8541, 249, 475, 12, 29, "MoreAboutSection"],
+Cell[9019, 263, 119, 2, 20, "MoreAbout"],
+Cell[9141, 267, 119, 2, 20, "MoreAbout"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9297, 274, 481, 12, 29, "RelatedLinksSection"],
+Cell[9781, 288, 129, 3, 20, "RelatedLinks"],
+Cell[9913, 293, 129, 3, 20, "RelatedLinks"]
+}, Open  ]],
+Cell[10057, 299, 77, 0, 45, "History"],
+Cell[10137, 301, 23, 0, 20, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
