@@ -25,7 +25,7 @@
 (* :Context: ESML`ESMLPackage` *)
 (* :Package version: 1.0 *)
 (* :History:  Version 1.0 September 16 2015 *)
-(* :Mathematica version: 10.2.0 for Mac OS X x86 (64-bit) (July 29, 2015) *)
+(* :Mathematica version: 10.2.0 for Mac OS X x86 (64-bit) (July 29, 2015) & 10.2.0 for Microsft Windows (64-bit) (July 7, 2015)*)
 (* :Discussion: Give more details here.*)
 
 
@@ -35,7 +35,12 @@ BeginPackage["ESML`ESMLPackage`"];
 (* :Code Section (Call Unprotect and ClearAll): *)
 
 
+Unprotect["`*"]; 
+ClearAll["`*"];
+
+
 (* :Usage Messages: *)
+TransitionMatrixSML::usage="TransitionMatrixSML[s,T,Z] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (zero order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are nothing but tags.\n"
 TransitionMatrixESML::usage="TransitionMatrixESML[s,T,Z] represents the transition matrix between a set of Configurations of Interest (CoI) in the long run of a one-step Markov process at the edges of the phase space (first order approximation) as well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the CoI, DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI.\n"
 StationaryDistributionESML::usage="StationaryDistributionESML[s,Z,ConfigurationsOfInterest,TransitionMatrix] represents an estimation of the stationary distribution of a one-step Markov process at the edges of the phase space. ConfigurationsOfInterest contains a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array {\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the Configurations of Interest (CoI), DDrift_i and diffusion_i are, respectively, the derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must be monomorphic configurations (only one non-zero entrance, equal to Z) and any positive value for DDrift ad diffusion at those is valid. TransitionMatrix is a sparse array with the transition probabilities between the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for details).";
 
@@ -117,7 +122,7 @@ Do[TMat[[i,i]]=1-speed[[i]];
 ];
 
 
-Options[StationaryDistributionESML]={"Verbose"->False};
+Options[StationaryDistributionESML]={"Verbose"->False,Method->{"Arnoldi","Shift"->1.00001,"Tolerance"-> 0,"MaxIterations"->10^4}};
 StationaryDistributionESML[s_,Z_,CoI_,TMat_,opts:OptionsPattern[]]:=
 With[{prints=OptionValue["Verbose"]},
 Module[{ vec={0.},speed={0.},\[Sigma]2=0.,temp},
@@ -251,12 +256,12 @@ SparseArray[Flatten[Table[
 \*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
 \*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
 \*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
-Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
+Pp=1.;Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
 (*Pm=1+\!\(
 \*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
 \*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
 \*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
-Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i+1]]-1,CoIindex[[i]]+1,-1}];
+Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,CoIindex[[i]]+1,CoIindex[[i+1]]-1}];
 (*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
 
 {{i,i+1}-> Tp[[CoIindex[[i]]]] /Pp,{i+1,i}->Tm[[CoIindex[[i+1]]]]/Pm}
@@ -294,11 +299,106 @@ Pm=1.;Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,Z,2,-1}];
 
 
 
+TransitionsPairsSML[Tp_List,Tm_List]:=
+If[Length[Tp]==Length[Tm],
+With[{Z=Length[Tp]-1,CoIindex={1,Length[Tp]}},
+Module[{Pp=1.,Pm=1.},
+
+(* consider transitions between monomorphic states *)
+{Transpose@{
+CoIindex, (* Point index, from 1 to Z+1 *)
+{0.,1.},(*Point position from 0 to 1*)
+{1.,1.},(*Drift derivative*)
+{1.,1.}(*Diffusion*)
+},
+SparseArray[
+
+(*Pp=1+\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tm[\([\)\(k\)\(]\)]\), \(Tp[\([\)\(k\)\(]\)]\)]\)\);*)
+Do[Pp=1.+Pp Tm[[k]]/Tp[[k]];,{k,Z,2,-1}];
+(*Pm=1+\!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(j = CoI[\([\)\(i\)\(]\)] + 1\), \(CoI[\([\)\(i + 1\)\(]\)] - 1\)]\(
+\*UnderoverscriptBox[\(\[Product]\), \(k = CoI[\([\)\(i\)\(]\)] + 1\), \(j\)]
+\*FractionBox[\(Tp[\([\)\(k\)\(]\)]\), \(Tm[\([\)\(k\)\(]\)]\)]\)\)*)
+Do[Pm=1.+Pm Tp[[k]]/Tm[[k]];,{k,2,Z}];
+(*CoI[[i]] to CoI[[i+1]]  and   CoI[[i+1]] to CoI[[i]]*)
+
+{{1,2}->Tp[[1]] /Pp,{2,1}->Tm[[Z+1]]/Pm}
+,{2,2}]
+}
+
+]]
+,Message[TransitionsPairsSML::difdimensions,Dimensions[Tp],Dimensions[Tm]]];
+
+Options[TransitionMatrixSML]={"Verbose"->False};
+TransitionMatrixSML[s_,T_,Z_,OptionsPattern[]]:=
+If[!ValueQ[T[2,1,0]],
+Message[TransitionMatrixESML::transitiondefinition,T];
+{{{}},{{}}},
+
+With[{prints=OptionValue["Verbose"]},
+Module[{CoIFull={{0}},\[Rho]Temp={{0}},\[Rho]={{0}},zeros={{0.,0.,0}},TMat,speed={0.},
+CoI=Table[{SparseArray[{i->Z},{s}],1.,1.},{i,1,s}],temp
+},
+
+
+(*****************************************************************************)
+If[prints,temp=PrintTemporary["Computing CoI and Transitions"];];
+(*****************************************************************************)
+\[Rho]=Flatten@
+Table[
+{zeros,\[Rho]Temp}=TransitionsPairsSML[Table[If[i==Z,0.,T[s2,s1,Z-i]],{i,0,Z}],Table[If[i==0,0.,T[s1,s2,i]],{i,0,Z}]];
+Table[
+{If[array[[1,1]]==1,s2,s1],If[array[[1,2]]==1,s2,s1]}->array[[2]]
+,{array,Most[ArrayRules[\[Rho]Temp]]}]
+,{s1,1,s-1},{s2,s1+1,s}];
+
+If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
+
+
+(*****************************************************************************)
+If[prints,temp=PrintTemporary["Matrix construction"];];
+(*****************************************************************************)
+TMat=SparseArray[\[Rho],{s,s}];
+
+speed=Total[Transpose[TMat]];
+(*TMat/=Max[speed];
+speed/=Max[speed];*)
+
+
+If[prints,NotebookDelete[temp];];
+(*****************************************************************************)
+
+
+Do[TMat[[i,i]]=1-speed[[i]];
+,{i,1,Length@TMat}];
+
+{CoI,TMat}
+
+]
+]
+];
+
+
 
 End[];
 
 
 (* :Code Section (Call Protect): *)
+
+
+Protect[TransitionMatrixESML];
+Protect[StationaryDistributionESML];
+Protect[DiscreteZero];
+Protect[TransitionsPairs];
+Protect[TransitionsPairsSML];
+Protect[TransitionMatrixSML];
+
+
+
 
 
 EndPackage[];

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     12475,        376]
-NotebookOptionsPosition[      9975,        300]
-NotebookOutlinePosition[     11173,        335]
-CellTagsIndexPosition[     11088,        330]
+NotebookDataLength[     12505,        377]
+NotebookOptionsPosition[     10024,        302]
+NotebookOutlinePosition[     11203,        336]
+CellTagsIndexPosition[     11118,        331]
 WindowTitle->StationaryDistributionESML - ESML`ESMLPackage`
 WindowFrame->Normal*)
 
@@ -92,10 +92,12 @@ Cell[BoxData[GridBox[{
        ButtonBox["StationaryDistributionESML",
         BaseStyle->"Link",
         ButtonData->"paclet:ESML/ref/StationaryDistributionESML"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]StationaryDistributionESML[s,Z,ConfigurationsOfInterest,\
-TransitionMatrix] represents an estimation of the stationary distribution of \
-a one-step Markov process at the edges of the phase space. \
+       StyleBox[
+        RowBox[{
+        "s", ",", "Z", ",", "ConfigurationsOfInterest", ",", 
+         "TransitionMatrix"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]represents an estimation of the stationary distribution \
+of a one-step Markov process at the edges of the phase space. \
 ConfigurationsOfInterest contains a list {{CoI_ 1,DDrift_ 1,diffusion_ 1}, \
 ...,} where CoI_i is an array {Subscript[i, 1],...,Subscript[i, s]} with the \
 position of the Configurations of Interest (CoI), DDrift_i and diffusion_i \
@@ -200,9 +202,9 @@ Cell[TextData[ButtonBox["SEE ALSO",
 Cell[TextData[{
  Cell[BoxData[
   StyleBox[
-   ButtonBox["SymbolOne",
+   ButtonBox["TransitionMatrixESML",
     BaseStyle->"Link",
-    ButtonData->"paclet:ESML/ref/SymbolOne"],
+    ButtonData->"paclet:ESML/ref/TransitionMatrixESML"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -298,7 +300,6 @@ Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
 
 Cell[" ", "FooterCell"]
 },
-Saveable->False,
 WindowSize->{1904, 997},
 WindowMargins->{{Automatic, 1374}, {30, Automatic}},
 WindowTitle->"StationaryDistributionESML - ESML`ESMLPackage`",
@@ -313,7 +314,7 @@ TaggingRules->{
     "synonyms" -> {}, "title" -> "StationaryDistributionESML", "type" -> 
     "Symbol", "uri" -> "ESML/ref/StationaryDistributionESML"}, 
   "SearchTextTranslated" -> ""},
-FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "WindowsANSI"]
 ]
@@ -323,13 +324,13 @@ StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb",
 (*CellTagsOutline
 CellTagsIndex->{
  "PrimaryExamplesSection"->{
-  Cell[5323, 141, 516, 13, 30, "PrimaryExamplesSection",
+  Cell[5350, 143, 516, 13, 30, "PrimaryExamplesSection",
    CellTags->"PrimaryExamplesSection"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"PrimaryExamplesSection", 10967, 324}
+ {"PrimaryExamplesSection", 10997, 325}
  }
 *)
 (*NotebookFileOutline
@@ -337,47 +338,47 @@ Notebook[{
 Cell[618, 21, 2501, 60, 48, "AnchorBarGrid"],
 Cell[3122, 83, 48, 0, 43, "ObjectName"],
 Cell[CellGroupData[{
-Cell[3195, 87, 1303, 23, 109, "Usage"],
+Cell[3195, 87, 1330, 25, 109, "Usage"],
 Cell[CellGroupData[{
-Cell[4523, 114, 635, 17, 42, "NotesSection",
+Cell[4550, 116, 635, 17, 42, "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
-Cell[5161, 133, 51, 0, 30, "Notes"],
-Cell[5215, 135, 59, 0, 30, "Notes"]
+Cell[5188, 135, 51, 0, 30, "Notes"],
+Cell[5242, 137, 59, 0, 30, "Notes"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5323, 141, 516, 13, 30, "PrimaryExamplesSection",
+Cell[5350, 143, 516, 13, 30, "PrimaryExamplesSection",
  CellTags->"PrimaryExamplesSection"],
 Cell[CellGroupData[{
-Cell[5864, 158, 221, 5, 25, "ExampleSection"],
-Cell[6088, 165, 78, 0, 33, "ExampleText"]
+Cell[5891, 160, 221, 5, 25, "ExampleSection"],
+Cell[6115, 167, 78, 0, 33, "ExampleText"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6203, 170, 257, 7, 25, "ExampleSection"],
-Cell[6463, 179, 78, 0, 33, "ExampleText"]
+Cell[6230, 172, 257, 7, 25, "ExampleSection"],
+Cell[6490, 181, 78, 0, 33, "ExampleText"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6590, 185, 471, 12, 30, "SeeAlsoSection"],
-Cell[7064, 199, 484, 17, 56, "SeeAlso"]
+Cell[6617, 187, 471, 12, 30, "SeeAlsoSection"],
+Cell[7091, 201, 506, 17, 56, "SeeAlso"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7585, 221, 474, 12, 30, "TutorialsSection"],
-Cell[8062, 235, 125, 2, 18, "Tutorials"],
-Cell[8190, 239, 125, 2, 18, "Tutorials"]
+Cell[7634, 223, 474, 12, 30, "TutorialsSection"],
+Cell[8111, 237, 125, 2, 18, "Tutorials"],
+Cell[8239, 241, 125, 2, 18, "Tutorials"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8352, 246, 475, 12, 30, "MoreAboutSection"],
-Cell[8830, 260, 119, 2, 18, "MoreAbout"],
-Cell[8952, 264, 119, 2, 18, "MoreAbout"]
+Cell[8401, 248, 475, 12, 30, "MoreAboutSection"],
+Cell[8879, 262, 119, 2, 18, "MoreAbout"],
+Cell[9001, 266, 119, 2, 18, "MoreAbout"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9108, 271, 481, 12, 30, "RelatedLinksSection"],
-Cell[9592, 285, 129, 3, 18, "RelatedLinks"],
-Cell[9724, 290, 129, 3, 18, "RelatedLinks"]
+Cell[9157, 273, 481, 12, 30, "RelatedLinksSection"],
+Cell[9641, 287, 129, 3, 18, "RelatedLinks"],
+Cell[9773, 292, 129, 3, 18, "RelatedLinks"]
 }, Open  ]],
-Cell[9868, 296, 77, 0, 43, "History"],
-Cell[9948, 298, 23, 0, 25, "FooterCell"]
+Cell[9917, 298, 77, 0, 43, "History"],
+Cell[9997, 300, 23, 0, 25, "FooterCell"]
 }
 ]
 *)
