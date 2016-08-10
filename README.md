@@ -5,19 +5,22 @@ Extended Small Mutation Limit Library
 INSTALL
 ************************************************
 
-Open Mathematica
-Go to File > Install...
-Type of item: Application
-Sorce: From directory > Select "ESML" folder
-Choose the user who is using the package 
-Press OK.
+1. Open Mathematica
+2. Go to File > Install...
+3. Choose type of item: Application
+4. Sorce: From directory > Select "ESML" folder
+5. Choose the user who is using the package 
+6. Press OK.
 
+---------------
+Workaround
+---------------
 If OK does not work (due to some consistency check bug of Mathematica) manually install:
 
-Find the directory to install running in mathematica the command
+1. Find the directory to install running in mathematica the command
 $UserBaseDirectory
 
-Copy the folder ESML to 
+2. Copy the folder ESML to 
 $UserBaseDirectory/Applications
 
 
