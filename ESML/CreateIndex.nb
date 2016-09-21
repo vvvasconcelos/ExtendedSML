@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     10015,        268]
-NotebookOptionsPosition[      9543,        248]
-NotebookOutlinePosition[      9889,        263]
-CellTagsIndexPosition[      9846,        260]
+NotebookDataLength[     10069,        266]
+NotebookOptionsPosition[      9602,        246]
+NotebookOutlinePosition[      9943,        261]
+CellTagsIndexPosition[      9900,        258]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -88,13 +88,10 @@ Cell[BoxData[
              RowBox[{"StationaryDistributionESML", "::", "usage"}]}], ",", 
             RowBox[{"\"\<synonyms\>\"", "->", 
              RowBox[{"{", "}"}]}], ",", 
-            RowBox[{
-            "\"\<title\>\"", "->", "\"\<StationaryDistributionESML\>\""}], 
-            ",", 
+            RowBox[{"\"\<title\>\"", "->", "snname"}], ",", 
             RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
             RowBox[{"\"\<uri\>\"", "->", 
-             RowBox[{
-             "pname", "<>", "\"\</ref/StationaryDistributionESML\>\""}]}]}], 
+             RowBox[{"pname", "<>", "\"\</ref/\>\"", "<>", "snname"}]}]}], 
            "}"}]}], ",", 
          RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
         "}"}]}]}], "]"}], ";"}], "\n", 
@@ -116,7 +113,8 @@ Cell[BoxData[
     RowBox[{"NotebookClose", "[", "nb", "]"}], ";"}], "\n"}]}]], "Input",
  CellChangeTimes->{{3.6514170219162045`*^9, 3.651417026730399*^9}, 
    3.651417198400258*^9, {3.651417235015543*^9, 3.6514172615591483`*^9}, 
-   3.6514172953985915`*^9}],
+   3.6514172953985915`*^9, {3.68328652098388*^9, 3.6832865281073747`*^9}, {
+   3.6832865581145988`*^9, 3.6832865616343613`*^9}}],
 
 Cell[BoxData["Notebook"], "Output",
  CellChangeTimes->{3.6514170087084455`*^9}]
@@ -173,12 +171,11 @@ Cell[BoxData[
              RowBox[{"TransitionMatrixESML", "::", "usage"}]}], ",", 
             RowBox[{"\"\<synonyms\>\"", "->", 
              RowBox[{"{", "}"}]}], ",", 
-            RowBox[{"\"\<title\>\"", "->", "\"\<TransitionMatrixESML\>\""}], 
-            ",", 
+            RowBox[{"\"\<title\>\"", "->", "snname"}], ",", 
             RowBox[{"\"\<type\>\"", "->", "\"\<Symbol\>\""}], ",", 
             RowBox[{"\"\<uri\>\"", "->", 
-             RowBox[{"pname", "<>", "\"\</ref/TransitionMatrixESML\>\""}]}]}],
-            "}"}]}], ",", 
+             RowBox[{"pname", "<>", "\"\</ref/\>\"", "<>", "snname"}]}]}], 
+           "}"}]}], ",", 
          RowBox[{"\"\<SearchTextTranslated\>\"", "->", "\"\<\>\""}]}], 
         "}"}]}]}], "]"}], ";"}], "\n", 
    RowBox[{
@@ -222,7 +219,8 @@ Cell[BoxData[
    3.651413849842353*^9, 3.651413874938242*^9}, 3.6514140108322687`*^9, {
    3.6514140673133698`*^9, 3.65141407072902*^9}, {3.651416835109053*^9, 
    3.6514168356043816`*^9}, {3.651416942395463*^9, 3.651416944715001*^9}, 
-   3.651417001258503*^9, {3.6514172683986845`*^9, 3.6514173025263195`*^9}}],
+   3.651417001258503*^9, {3.6514172683986845`*^9, 3.6514173025263195`*^9}, {
+   3.68328654341739*^9, 3.6832865464939184`*^9}, 3.6832865769146643`*^9}],
 
 Cell[BoxData[{
  RowBox[{
@@ -247,8 +245,8 @@ Cell[BoxData[{
  CellChangeTimes->{{3.6514121082455807`*^9, 3.6514121392687073`*^9}}]
 },
 WindowSize->{1168, 709},
-WindowMargins->{{-1735, Automatic}, {202, Automatic}},
-FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -262,16 +260,15 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 130, 2, 31, "Input"],
-Cell[691, 24, 758, 19, 132, "Input"],
+Cell[558, 20, 130, 2, 30, "Input"],
+Cell[691, 24, 758, 19, 126, "Input"],
 Cell[CellGroupData[{
-Cell[1474, 47, 2917, 71, 332, "Input"],
-Cell[4394, 120, 79, 1, 31, "Output"]
+Cell[1474, 47, 2940, 69, 297, "Input"],
+Cell[4417, 118, 79, 1, 30, "Output"]
 }, Open  ]],
-Cell[4488, 124, 4287, 100, 412, "Input"],
-Cell[8778, 226, 761, 20, 112, "Input"]
+Cell[4511, 122, 4323, 100, 373, "Input"],
+Cell[8837, 224, 761, 20, 107, "Input"]
 }
 ]
 *)
 
-(* End of internal cache information *)

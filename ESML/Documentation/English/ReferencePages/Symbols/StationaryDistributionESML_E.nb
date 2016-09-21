@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     12505,        377]
-NotebookOptionsPosition[     10024,        302]
-NotebookOutlinePosition[     11203,        336]
-CellTagsIndexPosition[     11118,        331]
+NotebookDataLength[     31176,        863]
+NotebookOptionsPosition[     27635,        751]
+NotebookOutlinePosition[     28985,        790]
+CellTagsIndexPosition[     28858,        784]
 WindowTitle->StationaryDistributionESML - ESML`ESMLPackage`
 WindowFrame->Normal*)
 
@@ -98,17 +98,63 @@ Cell[BoxData[GridBox[{
          "TransitionMatrix"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]represents an estimation of the stationary distribution \
 of a one-step Markov process at the edges of the phase space. \
-ConfigurationsOfInterest contains a list {{CoI_ 1,DDrift_ 1,diffusion_ 1}, \
-...,} where CoI_i is an array {Subscript[i, 1],...,Subscript[i, s]} with the \
-position of the Configurations of Interest (CoI), DDrift_i and diffusion_i \
-are, respectively, the derivative of the drift (1st Kramers-Moyal term) and \
-the diffusion (2nd Kramers-Moyal term) at the CoI. The first s elements must \
-be monomorphic configurations (only one non-zero entrance, equal to Z) and \
-any positive value for DDrift ad diffusion at those is valid. \
-TransitionMatrix is a sparse array with the transition probabilities between \
-the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix \
-can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for \
-details)."
+ConfigurationsOfInterest contains a list ",
+     Cell[BoxData[
+      FormBox[
+       RowBox[{"{", 
+        RowBox[{"{", 
+         SubscriptBox["CoI", "1"]}]}], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     ",",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["DDrift", "1"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     ",",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["Diffusion", "1"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     "}, ...,} where ",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["CoI", "i"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     " is an array ",
+     Cell[BoxData[
+      FormBox[
+       RowBox[{"{", 
+        SubscriptBox["i", "1"]}], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     ", ..., ",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["i", "S"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     "} with the position of the Configurations of Interest (CoI), ",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["DDrift", "i"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     " and ",
+     Cell[BoxData[
+      FormBox[
+       SubscriptBox["Diffusion", "i"], TraditionalForm]], "InlineFormula",
+      FormatType->"TraditionalForm"],
+     " are, respectively, the derivative of the drift (1st Kramers-Moyal \
+coefficient, or 1st jump moment) and the diffusion (2nd Kramers-Moyal \
+coefficient, or second jump moment) at the CoI. The first ",
+     StyleBox["S",
+      FontSlant->"Italic"],
+     " elements must be monomorphic configurations (only one non-zero \
+entrance, equal to ",
+     StyleBox["Z",
+      FontSlant->"Italic"],
+     ") and any positive value for DDrift and diffusion at those is valid. \
+TransitionMatrix is a sparse array with the invariant transition \
+probabilities between the CoI. Both ConfigurationsOfInterest and \
+TransitionMatrix can be obtained from TransitionMatrixESML (see \
+?TransitionMatrixESML for details)."
     }]]}
   }]], "Usage"],
 
@@ -133,9 +179,11 @@ Cell[TextData[Cell[BoxData[
  CellGroupingRules->{"SectionGrouping", 50},
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
-Cell["Note about the function goes here.", "Notes"],
-
-Cell["Another Note about the function goes here.", "Notes"]
+Cell["\<\
+StationaryDistribution uses computes the unnomarlized stationary distribution \
+given by the TransitionMatrix and gives the approriate weight using the \
+information contained in the CoI.\
+\>", "Notes"]
 }, Open  ]]
 }, Open  ]],
 
@@ -161,11 +209,412 @@ Cell[CellGroupData[{
 Cell[TextData[{
  "Basic Examples",
  "\[NonBreakingSpace]\[NonBreakingSpace]",
- Cell["(#)", "ExampleCount"]
+ Cell["(1)", "ExampleCount"]
 }], "ExampleSection", "ExampleSection",
+ CellID->410805815,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
-Cell["Use the ExampleText style to write cells like this one.", "ExampleText"]
+Cell["Importing the package:", "ExampleText",
+ Editable->True,
+ CellID->11735465],
+
+Cell[BoxData[
+ RowBox[{"<<", "ESML`"}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->199800651],
+
+Cell["\<\
+Checking if the package was imported and reviewing the function:\
+\>", "ExampleText",
+ CellID->207449338],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "TransitionMatrixESML"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->585765480],
+
+Cell[BoxData[
+ StyleBox["\<\"TransitionMatrixESML[s,T,Z] represents the transition matrix \
+between a set of Configurations of Interest (CoI) in the long run of a \
+one-step Markov process at the edges of the phase space (first order \
+approximation) as well as the set itself. The process is \
+i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) \
+such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+\(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
+probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
+\(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
+\*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
+\(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
+TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
+a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
+{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
+with the position of the CoI, DDrift_i and diffusion_i are, respectively, the \
+derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
+Kramers-Moyal term) at the CoI.\\n\"\>", "MSG"]], "Print", "PrintUsage",
+ CellContext->"Cell$$2419`",
+ CellTags->"Info73683458775-7564475",
+ CellID->21976283]
+}, Open  ]],
+
+Cell[TextData[{
+ "Create a Transition function that computes the probability that strategy ",
+ StyleBox["fs",
+  FontSlant->"Italic"],
+ " decreases and strategy ",
+ StyleBox["ts",
+  FontSlant->"Italic"],
+ " increases when strategy fs has ",
+ StyleBox["k",
+  FontSlant->"Italic"],
+ " individuals"
+}], "ExampleText",
+ CellID->219930351],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"PopulationSize", "=", "10"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"MemeContageonRate", "=", 
+      FractionBox["1", "2"]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"MemeGenerationRate", "=", 
+      FractionBox["1", "10"]}]}], "\[IndentingNewLine]", "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NumberOfMemes", "=", "4"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"T", "[", 
+      RowBox[{"fs_", ",", "ts_", ",", "k_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", "MemeGenerationRate"}], ")"}], 
+       FractionBox["k", "PopulationSize"], 
+       FractionBox[
+        RowBox[{"PopulationSize", "-", "k"}], "PopulationSize"], 
+       "MemeContageonRate"}], "+", 
+      RowBox[{"MemeGenerationRate", " ", 
+       FractionBox["k", "PopulationSize"], 
+       FractionBox["1", 
+        RowBox[{"NumberOfMemes", "-", "1"}]]}]}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->148007492],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"CoI", ",", "TMat"}], "}"}], "=", 
+   RowBox[{"TransitionMatrixESML", "[", 
+    RowBox[{"NumberOfMemes", ",", "T", ",", "PopulationSize", ",", 
+     RowBox[{"Verbose", "\[Rule]", "True"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"CoI", "//", "Normal"}], "\[IndentingNewLine]", "TMat"}], "Input",
+ CellLabel->"In[16]:=",
+ CellID->373172059],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"10", ",", "0", ",", "0", ",", "0"}], "}"}], ",", "1.`", ",", 
+     "1.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "10", ",", "0", ",", "0"}], "}"}], ",", "1.`", ",", 
+     "1.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "10", ",", "0"}], "}"}], ",", "1.`", ",", 
+     "1.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "10"}], "}"}], ",", "1.`", ",", 
+     "1.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "5", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0", ",", "5", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0", ",", "0", ",", "5"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "5", ",", "5", ",", "0"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "5", ",", "0", ",", "5"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "5", ",", "5"}], "}"}], ",", 
+     RowBox[{"-", "0.06666666666666668`"}], ",", 
+     FractionBox["31", "2400"]}], "}"}]}], "}"}]], "Output",
+ CellContext->"Cell$$2419`",
+ CellLabel->"Out[17]=",
+ CellID->39099815],
+
+Cell[BoxData[
+ TagBox[
+  TemplateBox[{RowBox[{
+      StyleBox[
+       TagBox["SparseArray", "SummaryHead"], "NonInterpretableSummary"], 
+      StyleBox["[", "NonInterpretableSummary"], 
+      DynamicModuleBox[{Typeset`open$$ = False}, 
+       PanelBox[
+        PaneSelectorBox[{False -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquarePlusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = True), Appearance -> None,
+                 Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]], 
+              GraphicsBox[
+               RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggmIQ26p8d9wspXP2c4wXbTH/ccX+xSLFx4GrXtnjEt/Z
+beC6c8sL+xvuy9fVTHtrfzIi91/81/c4xUk1f6DESXX/cPXvcPXXQJkz2Pw7
+VPw10tItrcUnBf+ZtLrugn1eXqqRjcp9+0eSUQ+fnXpDsjkFc4NVbrPftn89
+e5995dTn9ot6jBQa4nGHMy71pJozVPxFLfUD5S9axyO1/EUtd1IrfHCJAwDB
+APrg
+                "], {{0, 0}, {10, 10}}, {0, 1}], AspectRatio -> 1, Axes -> 
+               False, Frame -> False, FrameLabel -> {None, None}, FrameStyle -> 
+               Directive[
+                 Opacity[0.5], 
+                 Thickness[Tiny], 
+                 RGBColor[0.368417, 0.506779, 0.709798]], 
+               FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+               Directive[
+                 GrayLevel[0.5, 0.4]], ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}], 
+               Method -> {
+                "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                 Automatic, "DefaultPlotStyle" -> Automatic, "DomainPadding" -> 
+                 Scaled[0.02], "RangePadding" -> Scaled[0.05]}], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox[
+                   "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["28", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"10", ",", "10"}], "}"}], "SummaryItem"]}]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}], True -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquareMinusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = False), Appearance -> 
+                None, Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]], 
+              GraphicsBox[
+               RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGDggmIQ26p8d9wspXP2c4wXbTH/ccX+xSLFx4GrXtnjEt/Z
+beC6c8sL+xvuy9fVTHtrfzIi91/81/c4xUk1f6DESXX/cPXvcPXXQJkz2Pw7
+VPw10tItrcUnBf+ZtLrugn1eXqqRjcp9+0eSUQ+fnXpDsjkFc4NVbrPftn89
+e5995dTn9ot6jBQa4nGHMy71pJozVPxFLfUD5S9axyO1/EUtd1IrfHCJAwDB
+APrg
+                "], {{0, 0}, {10, 10}}, {0, 1}], AspectRatio -> 1, Axes -> 
+               False, Frame -> False, FrameLabel -> {None, None}, FrameStyle -> 
+               Directive[
+                 Opacity[0.5], 
+                 Thickness[Tiny], 
+                 RGBColor[0.368417, 0.506779, 0.709798]], 
+               FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> 
+               Directive[
+                 GrayLevel[0.5, 0.4]], ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}], 
+               Method -> {
+                "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                 Automatic, "DefaultPlotStyle" -> Automatic, "DomainPadding" -> 
+                 Scaled[0.02], "RangePadding" -> Scaled[0.05]}], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox[
+                   "\"Specified elements: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["28", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Dimensions: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox[
+                    RowBox[{"{", 
+                    RowBox[{"10", ",", "10"}], "}"}], "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Default: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["0", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Density: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["0.28`", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Elements:\"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["\"\"", "SummaryItem"]}]}, {
+                 TagBox[
+                  TagBox[
+                   GridBox[{{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "5"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "0.3096309306725551`", ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "6"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "0.3096309306725551`", ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "7"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "0.3096309306725551`", ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}, {
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}], "\[Rule]", 
+                    StyleBox[
+                    PaneBox[
+                    "0.07110720798233472`", ContentPadding -> False, 
+                    FrameMargins -> 0, StripOnInput -> True, BaselinePosition -> 
+                    Baseline, ImageSize -> {{1, 300}, Automatic}], 
+                    LineBreakWithin -> False]}]}, {
+                    ItemBox[
+                    "\"\[VerticalEllipsis]\"", Alignment -> Center, 
+                    StripOnInput -> False]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                   "Column"], "SummaryItem"]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}]}, 
+         Dynamic[Typeset`open$$], ImageSize -> Automatic], BaselinePosition -> 
+        Baseline], DynamicModuleValues :> {}], 
+      StyleBox["]", "NonInterpretableSummary"]}]},
+   "CopyTag",
+   DisplayFunction->(#& ),
+   InterpretationFunction->("SparseArray[<28>, {10, 10}]"& )],
+  False,
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellContext->"Cell$$2419`",
+ CellLabel->"Out[18]=",
+ CellID->360666176]
+}, Open  ]],
+
+Cell["\<\
+Use StationaryDistributionESML to compute the invariant weight associate with \
+all the CoI.\
+\>", "ExampleText",
+ CellID->358333312],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"WeightDistribution", "=", 
+  RowBox[{"Last", "@", 
+   RowBox[{"StationaryDistributionESML", "[", 
+    RowBox[{"3", ",", "10", ",", "CoI", ",", "TMat"}], "]"}]}]}]], "Input",
+ CellLabel->"In[22]:=",
+ CellID->295214525],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.03571167514181049`", ",", "0.035711675141810485`", ",", 
+   "0.035711675141810485`", ",", "0.03571167514181048`", ",", 
+   "0.14285888323879298`", ",", "0.14285888323879303`", ",", 
+   "0.14285888323879306`", ",", "0.1428588832387929`", ",", 
+   "0.14285888323879298`", ",", "0.14285888323879303`"}], "}"}]], "Output",
+ CellContext->"Cell$$2419`",
+ CellLabel->"Out[22]=",
+ CellID->226284000]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -301,7 +750,7 @@ Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
 Cell[" ", "FooterCell"]
 },
 WindowSize->{1904, 997},
-WindowMargins->{{Automatic, 1374}, {30, Automatic}},
+WindowMargins->{{1912, Automatic}, {Automatic, 0}},
 WindowTitle->"StationaryDistributionESML - ESML`ESMLPackage`",
 DockedCells->None,
 TaggingRules->{
@@ -314,9 +763,9 @@ TaggingRules->{
     "synonyms" -> {}, "title" -> "StationaryDistributionESML", "type" -> 
     "Symbol", "uri" -> "ESML/ref/StationaryDistributionESML"}, 
   "SearchTextTranslated" -> ""},
-FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
-  CharacterEncoding -> "WindowsANSI"]
+  CharacterEncoding -> "UTF-8"]
 ]
 (* End of Notebook Content *)
 
@@ -324,13 +773,18 @@ StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb",
 (*CellTagsOutline
 CellTagsIndex->{
  "PrimaryExamplesSection"->{
-  Cell[5350, 143, 516, 13, 30, "PrimaryExamplesSection",
-   CellTags->"PrimaryExamplesSection"]}
+  Cell[6810, 191, 516, 13, 30, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection"]},
+ "Info73683458775-7564475"->{
+  Cell[8023, 237, 1343, 20, 114, "Print",
+   CellTags->"Info73683458775-7564475",
+   CellID->21976283]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"PrimaryExamplesSection", 10997, 325}
+ {"PrimaryExamplesSection", 28602, 774},
+ {"Info73683458775-7564475", 28730, 777}
  }
 *)
 (*NotebookFileOutline
@@ -338,49 +792,80 @@ Notebook[{
 Cell[618, 21, 2501, 60, 48, "AnchorBarGrid"],
 Cell[3122, 83, 48, 0, 43, "ObjectName"],
 Cell[CellGroupData[{
-Cell[3195, 87, 1330, 25, 109, "Usage"],
+Cell[3195, 87, 2691, 71, 109, "Usage"],
 Cell[CellGroupData[{
-Cell[4550, 116, 635, 17, 42, "NotesSection",
+Cell[5911, 162, 635, 17, 42, "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
-Cell[5188, 135, 51, 0, 30, "Notes"],
-Cell[5242, 137, 59, 0, 30, "Notes"]
+Cell[6549, 181, 212, 4, 30, "Notes"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5350, 143, 516, 13, 30, "PrimaryExamplesSection",
+Cell[6810, 191, 516, 13, 30, "PrimaryExamplesSection",
  CellTags->"PrimaryExamplesSection"],
 Cell[CellGroupData[{
-Cell[5891, 160, 221, 5, 25, "ExampleSection"],
-Cell[6115, 167, 78, 0, 33, "ExampleText"]
-}, Open  ]],
+Cell[7351, 208, 241, 6, 25, "ExampleSection",
+ CellID->410805815],
+Cell[7595, 216, 81, 2, 33, "ExampleText",
+ CellID->11735465],
+Cell[7679, 220, 92, 3, 26, "Input",
+ CellID->199800651],
+Cell[7774, 225, 115, 3, 33, "ExampleText",
+ CellID->207449338],
 Cell[CellGroupData[{
-Cell[6230, 172, 257, 7, 25, "ExampleSection"],
-Cell[6490, 181, 78, 0, 33, "ExampleText"]
+Cell[7914, 232, 106, 3, 26, "Input",
+ CellID->585765480],
+Cell[8023, 237, 1343, 20, 114, "Print",
+ CellTags->"Info73683458775-7564475",
+ CellID->21976283]
+}, Open  ]],
+Cell[9381, 260, 333, 12, 33, "ExampleText",
+ CellID->219930351],
+Cell[9717, 274, 1099, 30, 197, "Input",
+ CellID->148007492],
+Cell[CellGroupData[{
+Cell[10841, 308, 418, 11, 59, "Input",
+ CellID->373172059],
+Cell[11262, 321, 1997, 61, 84, "Output",
+ CellID->39099815],
+Cell[13262, 384, 9667, 202, 78, "Output",
+ CellID->360666176]
+}, Open  ]],
+Cell[22944, 589, 143, 4, 33, "ExampleText",
+ CellID->358333312],
+Cell[CellGroupData[{
+Cell[23112, 597, 241, 6, 26, "Input",
+ CellID->295214525],
+Cell[23356, 605, 436, 10, 35, "Output",
+ CellID->226284000]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6617, 187, 471, 12, 30, "SeeAlsoSection"],
-Cell[7091, 201, 506, 17, 56, "SeeAlso"]
+Cell[23841, 621, 257, 7, 25, "ExampleSection"],
+Cell[24101, 630, 78, 0, 33, "ExampleText"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7634, 223, 474, 12, 30, "TutorialsSection"],
-Cell[8111, 237, 125, 2, 18, "Tutorials"],
-Cell[8239, 241, 125, 2, 18, "Tutorials"]
+Cell[24228, 636, 471, 12, 30, "SeeAlsoSection"],
+Cell[24702, 650, 506, 17, 57, "SeeAlso"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8401, 248, 475, 12, 30, "MoreAboutSection"],
-Cell[8879, 262, 119, 2, 18, "MoreAbout"],
-Cell[9001, 266, 119, 2, 18, "MoreAbout"]
+Cell[25245, 672, 474, 12, 30, "TutorialsSection"],
+Cell[25722, 686, 125, 2, 18, "Tutorials"],
+Cell[25850, 690, 125, 2, 18, "Tutorials"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9157, 273, 481, 12, 30, "RelatedLinksSection"],
-Cell[9641, 287, 129, 3, 18, "RelatedLinks"],
-Cell[9773, 292, 129, 3, 18, "RelatedLinks"]
+Cell[26012, 697, 475, 12, 30, "MoreAboutSection"],
+Cell[26490, 711, 119, 2, 18, "MoreAbout"],
+Cell[26612, 715, 119, 2, 18, "MoreAbout"]
 }, Open  ]],
-Cell[9917, 298, 77, 0, 43, "History"],
-Cell[9997, 300, 23, 0, 25, "FooterCell"]
+Cell[CellGroupData[{
+Cell[26768, 722, 481, 12, 30, "RelatedLinksSection"],
+Cell[27252, 736, 129, 3, 18, "RelatedLinks"],
+Cell[27384, 741, 129, 3, 18, "RelatedLinks"]
+}, Open  ]],
+Cell[27528, 747, 77, 0, 43, "History"],
+Cell[27608, 749, 23, 0, 25, "FooterCell"]
 }
 ]
 *)
 
-(* End of internal cache information *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     85625,       1943]
-NotebookOptionsPosition[     84514,       1908]
-NotebookOutlinePosition[     85214,       1932]
-CellTagsIndexPosition[     85171,       1929]
+NotebookDataLength[     86256,       1951]
+NotebookOptionsPosition[     85138,       1916]
+NotebookOutlinePosition[     85837,       1940]
+CellTagsIndexPosition[     85794,       1937]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -100,41 +100,46 @@ Cell[BoxData[
   RowBox[{
    RowBox[{
     RowBox[{"TransitionMatrixSML", "::", "usage"}], "=", 
-    "\"\<TransitionMatrixSML[s,T,Z] represents the transition matrix between \
-a set of Configurations of Interest (CoI) in the long run of a one-step \
-Markov process at the edges of the phase space (zero order approximation) as \
-well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \
-\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \
-\!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+    "\"\<TransitionMatrixSML[strategies,T,Z] represents the invariant \
+transition matrix between a set of Configurations of Interest (CoI) of a \
+one-step Markov process at the edges of the phase space (zeroth order \
+approximation) as well as the set itself. The process is \
+i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) \
+such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
 \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
 probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
 \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
 \*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
 \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
 TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
-a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
-{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
-with the position of the CoI, DDrift_i and diffusion_i are nothing but \
-tags.\\n\>\""}], "\n", 
+a list {{\!\(\*SubscriptBox[\(CoI\), \(1\)]\),\!\(\*SubscriptBox[\(DDrift\), \
+\(1\)]\),\!\(\*SubscriptBox[\(Diffusion\), \(1\)]\)}, ...,} where \
+\!\(\*SubscriptBox[\(CoI\), \(i\)]\) is an array {\!\(\*SubscriptBox[\(i\), \
+\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the \
+CoI, \!\(\*SubscriptBox[\(DDrift\), \(i\)]\) and \
+\!\(\*SubscriptBox[\(Diffusion\), \(i\)]\) are nothing but tags.\>\""}], "\n", 
    RowBox[{
     RowBox[{"TransitionMatrixESML", "::", "usage"}], "=", 
-    "\"\<TransitionMatrixESML[s,T,Z] represents the transition matrix between \
-a set of Configurations of Interest (CoI) in the long run of a one-step \
-Markov process at the edges of the phase space (first order approximation) as \
-well as the set itself. The process is i=(\!\(\*SubscriptBox[\(i\), \
-\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) such that \
-\!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
+    "\"\<TransitionMatrixESML[strategies,T,Z] represents the invariant \
+transition matrix between a set of Configurations of Interest (CoI) of a \
+one-step Markov process at the edges of the phase space (first order \
+approximation) as well as the set itself. The process is \
+i=(\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)) \
+such that \!\(\*UnderoverscriptBox[\(\[Sum]\), \(k = 1\), \
 \(s\)]\)\!\(\*SubscriptBox[\(i\), \(k\)]\)=Z and T[fs,ts,k] is the transition \
 probability from configuration (0,...,\!\(\*SubscriptBox[\(i\), \
 \(fs\)]\)=k,...,\!\(\*SubscriptBox[\(i\), \(ts\)]\)=Z-k,...,0) to (0,...,\!\(\
 \*SubscriptBox[\(i\), \(fs\)]\)=k-1,...,\!\(\*SubscriptBox[\(i\), \
 \(ts\)]\)=Z-k+1,...,0) in each time step. The output is of the form {CoI, \
 TransitionMatrix}, where TransitionMatrix is a sparse array and CoI contains \
-a list {{CoI_1,DDrift_1,diffusion_1}, ...,} where CoI_i is an array \
-{\!\(\*SubscriptBox[\(i\), \(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} \
-with the position of the CoI, DDrift_i and diffusion_i are, respectively, the \
-derivative of the drift (1st Kramers-Moyal term) and the diffusion (2nd \
-Kramers-Moyal term) at the CoI.\\n\>\""}], "\n", 
+a list {{\!\(\*SubscriptBox[\(CoI\), \(1\)]\),\!\(\*SubscriptBox[\(DDrift\), \
+\(1\)]\),\!\(\*SubscriptBox[\(Diffusion\), \(1\)]\)}, ...,} where \
+\!\(\*SubscriptBox[\(CoI\), \(i\)]\) is an array {\!\(\*SubscriptBox[\(i\), \
+\(1\)]\),...,\!\(\*SubscriptBox[\(i\), \(s\)]\)} with the position of the \
+CoI, \!\(\*SubscriptBox[\(DDrift\), \(i\)]\) and \
+\!\(\*SubscriptBox[\(Diffusion\), \(i\)]\) are, respectively, the derivative \
+of the drift (1st Kramers-Moyal coefficient) and the diffusion (2nd \
+Kramers-Moyal coefficient) at the CoI.\>\""}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"StationaryDistributionESML", "::", "usage"}], "=", 
@@ -156,7 +161,7 @@ TransitionMatrixESML (see ?TransitionMatrixESML for details).\>\""}],
  CellChangeTimes->{{3.651406997237536*^9, 3.6514070316743317`*^9}, 
    3.6514070621820173`*^9, {3.651576199790165*^9, 3.6515762035597005`*^9}, {
    3.6515768594268694`*^9, 3.6515768703772345`*^9}, {3.651576909183337*^9, 
-   3.6515769126856937`*^9}}],
+   3.6515769126856937`*^9}, {3.683293156990326*^9, 3.683293330131708*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -177,7 +182,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"TransitionMatrixESML", "[", 
-      RowBox[{"s_", ",", "T_", ",", "Z_", ",", 
+      RowBox[{"strategies_", ",", "T_", ",", "Z_", ",", 
        RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
      "\[IndentingNewLine]", 
      RowBox[{"If", "[", 
@@ -202,9 +207,12 @@ Cell[BoxData[
        RowBox[{"With", "[", 
         RowBox[{
          RowBox[{"{", 
-          RowBox[{"prints", "=", 
-           RowBox[{"OptionValue", "[", "\"\<Verbose\>\"", "]"}]}], "}"}], ",",
-          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"prints", "=", 
+            RowBox[{"OptionValue", "[", "\"\<Verbose\>\"", "]"}]}], ",", " ", 
+           RowBox[{"s", "=", 
+            RowBox[{"Length", "[", "strategies", "]"}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
          RowBox[{"Module", "[", 
           RowBox[{
            RowBox[{"{", 
@@ -739,7 +747,8 @@ errors.\>\"", "]"}], ";", "\[IndentingNewLine]",
  CellChangeTimes->{{3.651407085112678*^9, 3.6514070997349854`*^9}, {
   3.651407150113158*^9, 3.651407161163913*^9}, {3.651407195719973*^9, 
   3.6514071961134043`*^9}, {3.651408502073988*^9, 3.651408502532854*^9}, {
-  3.65148486565149*^9, 3.651484865931675*^9}}],
+  3.65148486565149*^9, 3.651484865931675*^9}, {3.6832924573848624`*^9, 
+  3.6832924843946877`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -757,7 +766,6 @@ has definition.\>\""}], ";"}], "\[IndentingNewLine]",
      RowBox[{"TransitionMatrixESML", "::", "wrongpath"}], "=", 
      "\"\<The path `1` is not a valid directory. Please provide a valid \
 directory (e.g., NotebookDirectory[]). Exporting to `2`.\>\""}], ";"}], "\n", 
-   
    RowBox[{
     RowBox[{
      RowBox[{"StationaryDistributionESML", "::", "transitiondefinition"}], 
@@ -1907,17 +1915,17 @@ Cell[BoxData[
   RowBox[{"EndPackage", "[", "]"}], ";"}]], "Code"]
 },
 AutoGeneratedPackage->Automatic,
-WindowSize->{1366, 685},
-WindowMargins->{{-1374, Automatic}, {Automatic, -8}},
+WindowSize->{1904, 1117},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
 TaggingRules->None,
 Magnification:>1.8 Inherited,
-FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->Notebook[{
    Cell[
     StyleData[StyleDefinitions -> "Default.nb"]], 
    Cell[
     StyleData["Input"], InitializationCell -> True]}, Visible -> False, 
-  FrontEndVersion -> "10.2 for Microsoft Windows (64-bit) (July 7, 2015)", 
+  FrontEndVersion -> "11.0 for Microsoft Windows (64-bit) (July 28, 2016)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
 ]
 (* End of Notebook Content *)
@@ -1931,22 +1939,21 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 1895, 51, 314, "Code"],
-Cell[2456, 73, 109, 3, 89, "Code"],
-Cell[2568, 78, 222, 6, 54, "Input"],
-Cell[2793, 86, 202, 6, 89, "Input"],
-Cell[2998, 94, 3992, 64, 283, "Code"],
-Cell[6993, 160, 25892, 581, 4946, "Input"],
-Cell[32888, 743, 925, 22, 218, "Code"],
-Cell[33816, 767, 117, 3, 54, "Input"],
-Cell[33936, 772, 121, 2, 89, "Code"],
-Cell[34060, 776, 49307, 1092, 7689, "Input"],
-Cell[83370, 1870, 68, 2, 89, "Code"],
-Cell[83441, 1874, 187, 5, 54, "Input"],
-Cell[83631, 1881, 801, 21, 327, "Input"],
-Cell[84435, 1904, 75, 2, 89, "Code"]
+Cell[558, 20, 1895, 51, 322, "Code"],
+Cell[2456, 73, 109, 3, 90, "Code"],
+Cell[2568, 78, 222, 6, 82, "Input"],
+Cell[2793, 86, 202, 6, 117, "Input"],
+Cell[2998, 94, 4436, 69, 285, "Code"],
+Cell[7437, 165, 26076, 585, 4685, "Input"],
+Cell[33516, 752, 921, 21, 401, "Code"],
+Cell[34440, 775, 117, 3, 147, "Input"],
+Cell[34560, 780, 121, 2, 162, "Code"],
+Cell[34684, 784, 49307, 1092, 13444, "Input"],
+Cell[83994, 1878, 68, 2, 288, "Code"],
+Cell[84065, 1882, 187, 5, 174, "Input"],
+Cell[84255, 1889, 801, 21, 1058, "Input"],
+Cell[85059, 1912, 75, 2, 288, "Code"]
 }
 ]
 *)
 
-(* End of internal cache information *)
