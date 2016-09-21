@@ -10,10 +10,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
+<<<<<<< HEAD
 NotebookDataLength[     31176,        863]
 NotebookOptionsPosition[     27635,        751]
 NotebookOutlinePosition[     28985,        790]
 CellTagsIndexPosition[     28858,        784]
+=======
+NotebookDataLength[     14178,        445]
+NotebookOptionsPosition[     11695,        370]
+NotebookOutlinePosition[     12869,        404]
+CellTagsIndexPosition[     12784,        399]
+>>>>>>> origin/master
 WindowTitle->StationaryDistributionESML - ESML`ESMLPackage`
 WindowFrame->Normal*)
 
@@ -79,9 +86,11 @@ Cell[BoxData[GridBox[{
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}]
     }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+  }]], "AnchorBarGrid",
+ Editable->True],
 
-Cell["StationaryDistributionESML", "ObjectName"],
+Cell["StationaryDistributionESML", "ObjectName",
+ Editable->True],
 
 Cell[CellGroupData[{
 
@@ -105,12 +114,20 @@ ConfigurationsOfInterest contains a list ",
         RowBox[{"{", 
          SubscriptBox["CoI", "1"]}]}], TraditionalForm]], "InlineFormula",
       FormatType->"TraditionalForm"],
+<<<<<<< HEAD
      ",",
+=======
+     ", ",
+>>>>>>> origin/master
      Cell[BoxData[
       FormBox[
        SubscriptBox["DDrift", "1"], TraditionalForm]], "InlineFormula",
       FormatType->"TraditionalForm"],
+<<<<<<< HEAD
      ",",
+=======
+     ", ",
+>>>>>>> origin/master
      Cell[BoxData[
       FormBox[
        SubscriptBox["Diffusion", "1"], TraditionalForm]], "InlineFormula",
@@ -124,12 +141,18 @@ ConfigurationsOfInterest contains a list ",
      Cell[BoxData[
       FormBox[
        RowBox[{"{", 
+<<<<<<< HEAD
         SubscriptBox["i", "1"]}], TraditionalForm]], "InlineFormula",
       FormatType->"TraditionalForm"],
      ", ..., ",
      Cell[BoxData[
       FormBox[
        SubscriptBox["i", "S"], TraditionalForm]], "InlineFormula",
+=======
+        RowBox[{
+         SubscriptBox["i", "1"], ",", "...", ",", 
+         SubscriptBox["i", "s"]}]}], TraditionalForm]], "InlineFormula",
+>>>>>>> origin/master
       FormatType->"TraditionalForm"],
      "} with the position of the Configurations of Interest (CoI), ",
      Cell[BoxData[
@@ -142,14 +165,21 @@ ConfigurationsOfInterest contains a list ",
        SubscriptBox["Diffusion", "i"], TraditionalForm]], "InlineFormula",
       FormatType->"TraditionalForm"],
      " are, respectively, the derivative of the drift (1st Kramers-Moyal \
+<<<<<<< HEAD
 coefficient, or 1st jump moment) and the diffusion (2nd Kramers-Moyal \
 coefficient, or second jump moment) at the CoI. The first ",
      StyleBox["S",
+=======
+coefficient) and the diffusion (2nd Kramers-Moyal coefficient) at the CoI. \
+The first ",
+     StyleBox["s",
+>>>>>>> origin/master
       FontSlant->"Italic"],
      " elements must be monomorphic configurations (only one non-zero \
 entrance, equal to ",
      StyleBox["Z",
       FontSlant->"Italic"],
+<<<<<<< HEAD
      ") and any positive value for DDrift and diffusion at those is valid. \
 TransitionMatrix is a sparse array with the invariant transition \
 probabilities between the CoI. Both ConfigurationsOfInterest and \
@@ -157,6 +187,17 @@ TransitionMatrix can be obtained from TransitionMatrixESML (see \
 ?TransitionMatrixESML for details)."
     }]]}
   }]], "Usage"],
+=======
+     ") and any positive value for DDrift and Diffusion at those is valid. \
+TransitionMatrix is a sparse array with the transition probabilities between \
+the CoI in the long run. Both ConfigurationsOfInterest and TransitionMatrix \
+can be obtained from TransitionMatrixESML (see ?TransitionMatrixESML for \
+details)."
+    }],
+     Editable->True]}
+  }]], "Usage",
+ Editable->True],
+>>>>>>> origin/master
 
 Cell[CellGroupData[{
 
@@ -176,14 +217,23 @@ Cell[TextData[Cell[BoxData[
       FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
   Evaluator->None,
   Method->"Preemptive"]]]], "NotesSection",
+ Editable->True,
  CellGroupingRules->{"SectionGrouping", 50},
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
+<<<<<<< HEAD
 Cell["\<\
 StationaryDistribution uses computes the unnomarlized stationary distribution \
 given by the TransitionMatrix and gives the approriate weight using the \
 information contained in the CoI.\
 \>", "Notes"]
+=======
+Cell["Note about the function goes here.", "Notes",
+ Editable->True],
+
+Cell["Another Note about the function goes here.", "Notes",
+ Editable->True]
+>>>>>>> origin/master
 }, Open  ]]
 }, Open  ]],
 
@@ -201,6 +251,7 @@ Cell[TextData[ButtonBox["EXAMPLES",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "PrimaryExamplesSection",
+ Editable->True,
  CellTags->"PrimaryExamplesSection",
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
@@ -211,6 +262,7 @@ Cell[TextData[{
  "\[NonBreakingSpace]\[NonBreakingSpace]",
  Cell["(1)", "ExampleCount"]
 }], "ExampleSection", "ExampleSection",
+<<<<<<< HEAD
  CellID->410805815,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
@@ -615,6 +667,13 @@ Cell[BoxData[
  CellLabel->"Out[22]=",
  CellID->226284000]
 }, Open  ]]
+=======
+ Editable->True,
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
+
+Cell["Use the ExampleText style to write cells like this one.", "ExampleText",
+ Editable->True]
+>>>>>>> origin/master
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -626,9 +685,11 @@ Cell[BoxData[
    Cell["(#)", "ExampleCount"]
   }], "ExampleSection"],
   $Line = 0; Null]], "ExampleSection", "ExampleSection",
+ Editable->True,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
-Cell["Use the ExampleText style to write cells like this one.", "ExampleText"]
+Cell["Use the ExampleText style to write cells like this one.", "ExampleText",
+ Editable->True]
 }, Open  ]]
 }, Open  ]],
 
@@ -646,6 +707,7 @@ Cell[TextData[ButtonBox["SEE ALSO",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "SeeAlsoSection",
+ Editable->True,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
 Cell[TextData[{
@@ -665,7 +727,8 @@ Cell[TextData[{
     BaseStyle->"Link",
     ButtonData->"paclet:ESML/ref/SymbolTwo"],
    FontFamily->"Verdana"]], "InlineFormula"]
-}], "SeeAlso"]
+}], "SeeAlso",
+ Editable->True]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -682,15 +745,18 @@ Cell[TextData[ButtonBox["TUTORIALS",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "TutorialsSection",
+ Editable->True,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
 Cell[TextData[ButtonBox["Tutorial Title 1",
  BaseStyle->"Link",
- ButtonData->"paclet:ESML/tutorial/tutorial1"]], "Tutorials"],
+ ButtonData->"paclet:ESML/tutorial/tutorial1"]], "Tutorials",
+ Editable->True],
 
 Cell[TextData[ButtonBox["Tutorial Title 2",
  BaseStyle->"Link",
- ButtonData->"paclet:ESML/tutorial/tutorial2"]], "Tutorials"]
+ ButtonData->"paclet:ESML/tutorial/tutorial2"]], "Tutorials",
+ Editable->True]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -707,15 +773,18 @@ Cell[TextData[ButtonBox["MORE ABOUT",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection",
+ Editable->True,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
 Cell[TextData[ButtonBox["Title of Guide 1",
  BaseStyle->"Link",
- ButtonData->"paclet:ESML/guide/Guide1"]], "MoreAbout"],
+ ButtonData->"paclet:ESML/guide/Guide1"]], "MoreAbout",
+ Editable->True],
 
 Cell[TextData[ButtonBox["Title of Guide 2",
  BaseStyle->"Link",
- ButtonData->"paclet:ESML/guide/Guide2"]], "MoreAbout"]
+ ButtonData->"paclet:ESML/guide/Guide2"]], "MoreAbout",
+ Editable->True]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -732,25 +801,35 @@ Cell[TextData[ButtonBox["RELATED LINKS",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "RelatedLinksSection",
+ Editable->True,
  ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> True],
 
 Cell[TextData[ButtonBox["Link Title 1",
  BaseStyle->"Hyperlink",
  ButtonData->{
-   URL["URL.goes.here"], None}]], "RelatedLinks"],
+   URL["URL.goes.here"], None}]], "RelatedLinks",
+ Editable->True],
 
 Cell[TextData[ButtonBox["Link Title 2",
  BaseStyle->"Hyperlink",
  ButtonData->{
-   URL["URL.goes.here"], None}]], "RelatedLinks"]
+   URL["URL.goes.here"], None}]], "RelatedLinks",
+ Editable->True]
 }, Open  ]],
 
-Cell["Made for Mathematica 8  |  Last modified in September 2015", "History"],
+Cell["Made for Mathematica 8  |  Last modified in September 2015", "History",
+ Editable->True],
 
-Cell[" ", "FooterCell"]
+Cell[" ", "FooterCell",
+ Editable->True]
 },
+<<<<<<< HEAD
 WindowSize->{1904, 997},
 WindowMargins->{{1912, Automatic}, {Automatic, 0}},
+=======
+WindowSize->{1920, 997},
+WindowMargins->{{1912, Automatic}, {Automatic, -8}},
+>>>>>>> origin/master
 WindowTitle->"StationaryDistributionESML - ESML`ESMLPackage`",
 DockedCells->None,
 TaggingRules->{
@@ -773,25 +852,35 @@ StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb",
 (*CellTagsOutline
 CellTagsIndex->{
  "PrimaryExamplesSection"->{
+<<<<<<< HEAD
   Cell[6810, 191, 516, 13, 30, "PrimaryExamplesSection",
    CellTags->"PrimaryExamplesSection"]},
  "Info73683458775-7564475"->{
   Cell[8023, 237, 1343, 20, 114, "Print",
    CellTags->"Info73683458775-7564475",
    CellID->21976283]}
+=======
+  Cell[6715, 193, 533, 14, 30, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection"]}
+>>>>>>> origin/master
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
+<<<<<<< HEAD
  {"PrimaryExamplesSection", 28602, 774},
  {"Info73683458775-7564475", 28730, 777}
+=======
+ {"PrimaryExamplesSection", 12663, 393}
+>>>>>>> origin/master
  }
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[618, 21, 2501, 60, 48, "AnchorBarGrid"],
-Cell[3122, 83, 48, 0, 43, "ObjectName"],
+Cell[618, 21, 2518, 61, 48, "AnchorBarGrid"],
+Cell[3139, 84, 65, 1, 43, "ObjectName"],
 Cell[CellGroupData[{
+<<<<<<< HEAD
 Cell[3195, 87, 2691, 71, 109, "Usage"],
 Cell[CellGroupData[{
 Cell[5911, 162, 635, 17, 42, "NotesSection",
@@ -865,6 +954,49 @@ Cell[27384, 741, 129, 3, 18, "RelatedLinks"]
 }, Open  ]],
 Cell[27528, 747, 77, 0, 43, "History"],
 Cell[27608, 749, 23, 0, 25, "FooterCell"]
+=======
+Cell[3229, 89, 2610, 70, 109, "Usage"],
+Cell[CellGroupData[{
+Cell[5864, 163, 652, 18, 42, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+Cell[6519, 183, 68, 1, 30, "Notes"],
+Cell[6590, 186, 76, 1, 30, "Notes"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6715, 193, 533, 14, 30, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection"],
+Cell[CellGroupData[{
+Cell[7273, 211, 238, 6, 25, "ExampleSection"],
+Cell[7514, 219, 95, 1, 33, "ExampleText"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7646, 225, 274, 8, 25, "ExampleSection"],
+Cell[7923, 235, 95, 1, 33, "ExampleText"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8067, 242, 488, 13, 30, "SeeAlsoSection"],
+Cell[8558, 257, 523, 18, 57, "SeeAlso"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9118, 280, 491, 13, 30, "TutorialsSection"],
+Cell[9612, 295, 142, 3, 18, "Tutorials"],
+Cell[9757, 300, 142, 3, 18, "Tutorials"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9936, 308, 492, 13, 30, "MoreAboutSection"],
+Cell[10431, 323, 136, 3, 18, "MoreAbout"],
+Cell[10570, 328, 136, 3, 18, "MoreAbout"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10743, 336, 498, 13, 30, "RelatedLinksSection"],
+Cell[11244, 351, 146, 4, 18, "RelatedLinks"],
+Cell[11393, 357, 146, 4, 18, "RelatedLinks"]
+}, Open  ]],
+Cell[11554, 364, 94, 1, 43, "History"],
+Cell[11651, 367, 40, 1, 25, "FooterCell"]
+>>>>>>> origin/master
 }
 ]
 *)
